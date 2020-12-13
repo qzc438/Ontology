@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<meta name="viewport"
+		content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<script src="js/jquery.min.js"></script>
+	<script src="js/font.js"></script>
+	<script src="js/main.js"></script>
+</h:head>
+
+<h:body>
+<div class="subMain">
+		<div class="tableOverview">
+			<h2>Layer Description</h2>
+			<table>
+				<thead>
+					<tr>
+						<th align="left"><h:outputLabel id="Subject" value="Subject" /></th>
+						<th align="left"><h:outputLabel id="Property"
+								value="Property" /></th>
+						<th align="left"><h:outputLabel id="Object" value="Object" /></th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<ui:repeat var="ld"
+						value="#{layerDetailController.layerDescriptionList}"
+						varStatus="status">
+						<tr>
+							<td><h:outputText id="outSubject" value="#{ld.subject}" /></td>
+							<td><h:outputText id="outProperty" value="#{ld.property}" /></td>
+							<td><h:outputText id="outObjectLiteral" value="#{ld.object}"
+									rendered="#{ld.type == 'literal'}" /> <h:link id="outObjectUri"
+									value="#{ld.object}" rendered="#{ld.type == 'uri'}"
+									outcome="faces/layerDetail.xhtml?ID=#{ld.objectID}"></h:link></td>
+						</tr>
+					</ui:repeat>
+				</tbody>
+			</table>
+		</div>
+</div>
+</h:body>
+</html>

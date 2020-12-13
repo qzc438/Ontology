@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<meta name="viewport"
+		content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<title></title>
+	<!-- change: add(before main.css) -->
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css"/>
+	<link rel="stylesheet" href="css/swiper-3.4.2.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<script src="js/jquery.min.js"></script>
+	<!-- change: add(after jquery, before main.js) -->
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/swiper-3.4.2.jquery.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/font.js"></script>
+</h:head>
+
+
+<h:body>
+	<h:form>
+	<div id="app">
+	
+		<div class="header flex a-center">
+			<div class="header_btn flex col jlr">
+				<span></span><span></span><span></span>
+			</div>
+			<!--<div class="logo"></div>-->
+			
+			<div class="search flex a-center" style="position: relative">
+				<h:form>
+					<input type="text" id="keyword" name = "keyword" value = "#{indexController.keyword}" placeholder="Search Application, Data or Model Name" />
+					<h:commandButton value="" action="#{indexController.searchByKeywordAndFilters(filters)}"></h:commandButton>
+				</h:form>
+			</div>	
+		</div>
+
+		<div class="main jlr">
+			<div class="menubar"> 
+				<div class="menubarTitle flex a-center jlr">
+					<h:commandLink class="button-filter" value="Filter" action="#{indexController.searchByKeywordAndFilters(filters)}">
+					</h:commandLink>
+					<a class="button-clear" href="javascript:;">Clear all</a>
+				</div>
+				<div class="menubarWrap">
+					<!--menubarMixins-->
+					<div class="menubarMixins">
+					
+						<div class="modelformat flex">
+							<h5>Domain</h5>
+							<h:selectManyCheckbox value="#{filters.applicationDomains}">
+								<f:selectItems value="#{indexController.applicationDomainList}" var="ad" itemLabel="#{ad.applicationDomainName}" itemValue="#{ad.applicationDomainName}"/>
+							</h:selectManyCheckbox>
+						</div>
+						
+						<div class="modelformat flex multi-line">
+							<div class="item-line">
+								<!-- Accuracy -->
+								<h5>Performance</h5>
+								<h5 class="flex a-center" style="width: 65px;">Accuracy</h5>
+								<div class="modelformatTab flex">
+									<!-- slider -->
+									<div id="accuracy-slider"></div>
+									<div class="item flex a-center j-center">
+										<h:inputText border="0" value="#{filters.performanceAccuracy}"/>
+									</div>
+								</div>
+								<!-- Precision -->
+								<h5 class="flex a-center" style="width: 65px;">Precision</h5>
+								<div class="modelformatTab flex">
+									<!-- slider -->
+									<div id="precision-slider"></div>
+									<div class="item flex a-center j-center">
+										<h:inputText border="0" value="#{filters.performancePrecision}"/>
+									</div>
+								</div>
+								<!-- Recall -->
+								<h5 class="flex a-center" style="width: 65px;">Recall</h5>
+								<div class="modelformatTab flex">
+									<!-- slider -->
+									<div id="recall-slider"></div>
+									<div class="item flex a-center j-center">
+										<h:inputText border="0" value="#{filters.performanceRecall}"/>
+									</div>
+								</div>
+								<!-- F1Score -->
+								<h5 class="flex a-center" style="width: 65px;">F1 Score</h5>
+								<div class="modelformatTab flex">
+									<!-- slider -->
+									<div id="f1Score-slider"></div>
+									<div class="item flex a-center j-center">
+										<h:inputText border="0" value="#{filters.performanceF1Score}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					  <div class="modelformat flex multi-line">
+					  	<div class="item-line">
+					  		<h5>Model Type</h5>
+							<h:selectManyCheckbox value="#{filters.modelTypes}">
+								<f:selectItems value="#{indexController.modelTypeList}" var="m" itemLabel="#{m.modelTypeName}" itemValue="#{m.modelTypeName}"/>
+							</h:selectManyCheckbox>
+							<h5 class="flex a-center" style="width: 250px; margin-right: 30px;">Sensory Type</h5>
+							<h:selectManyCheckbox value="#{filters.sensoryTypes}">
+								<f:selectItems value="#{indexController.sensoryTypeList}" var="d" itemLabel="#{d.sensoryTypeName}" itemValue="#{d.sensoryTypeName}"/>
+							</h:selectManyCheckbox>
+							<h5 class="flex a-center" style="width: 317px; margin-right: 40px;">Number of Layers</h5>
+								<div class="modelformatTab flex">
+									<!--  
+									<div class="item flex a-center j-center">
+										<h:selectOneMenu>
+											<f:selectItem itemLabel="&gt;" itemValue="&gt;" />
+											<f:selectItem itemLabel="&lt;" itemValue="&lt;" />
+										</h:selectOneMenu>
+									</div>
+									-->
+									<!-- slider -->
+									<div id="numberOfLayer-slider"></div>
+									<div class="item flex a-center j-center">
+										<h:inputText border="0" value="#{filters.numberOfLayers}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="modelformat flex multi-line">
+							<div class="item-line">
+								<h5>Layer Type</h5>
+								<h:selectManyCheckbox value="#{filters.layerTypes}">
+									<f:selectItems value="#{indexController.layerTypeList}" var="l" itemLabel="#{l.layerTypeName}" itemValue="#{l.layerTypeName}"/>
+								</h:selectManyCheckbox>
+								<h5 class="flex a-center" style="width: 165px;">Core Layer Type</h5>
+								<h:selectManyCheckbox value="#{filters.coreLayerTypes}">
+									<f:selectItems value="#{indexController.coreLayerTypeList}" var="cl" itemLabel="#{cl.coreLayerTypeName}" itemValue="#{cl.coreLayerTypeName}"/>
+								</h:selectManyCheckbox>
+								<h5 class="flex a-center" style="width: 180px;">Functional Layer Type</h5>
+								<h:selectManyCheckbox value="#{filters.functionalLayerTypes}">
+									<f:selectItems value="#{indexController.functionalLayerTypeList}" var="fl" itemLabel="#{fl.functionalLayerTypeName}" itemValue="#{fl.functionalLayerTypeName}"/>
+								</h:selectManyCheckbox>
+							</div>
+						</div>
+				</div>
+			</div>
+			</div>
+
+
+			<!--collectionWrap-->
+			<div class="collectionWrap jlr">
+				<div class="flex wrap">
+				<ui:repeat var="as"
+					value="#{indexController.applicationSummaryList}"
+					varStatus="status">
+					<div class="item">
+						<div class="collectionTitle flex a-center">
+							<div class="iconWrap flex a-center j-center"><div class="icon"></div></div>
+							<div>#{as.applicationName}</div>
+						</div>
+						<div class="spanLine flex">
+							<span>Application Domain: <b>#{as.skinCancerName}</b>&nbsp;<b>#{as.musculoskeletalDisorderName}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Data Set Name:<b>#{as.dataName}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Data Feature: <b>#{as.dataFeature}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Sensory Type: <b>#{as.accelerometerName}</b>&nbsp;<b>#{as.gyroscopeName}</b></span>
+						</div>
+						<!--  
+						<div class="spanLine flex">
+							<span>Model Name: <b>#{ao.modelName}</b></span>
+						</div>
+						-->
+						<div class="spanLine flex">
+							<span>Model Number: <b>#{as.modelNumber}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Number of Layers: <b>#{as.numberOfLayers}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Max Accuracy: <b>#{as.maxAccuracy}</b></span>&nbsp;&nbsp;<span>Max Precision: <b>#{as.maxPrecision}</b></span>
+							&nbsp;&nbsp;<span>Max Recall: <b>#{as.maxRecall}</b></span>&nbsp;&nbsp;<span>Max F1Score: <b>#{as.maxF1Score}</b></span>
+						</div>
+						<br/>
+						<!-- cope this for 3 times to show scoll
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<div class="spanLine flex">
+										<span>Model Type: <b>Scoll 1</b></span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance Accuracy: 1</span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance Precision: 1</span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance Recall: 1</span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance F1Score: 1</span>
+									</div>
+								</div>
+								<div class="swiper-slide">
+									<div class="spanLine flex">
+										<span>Model Type: <b>Scoll 2</b></span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance Accuracy: 1</span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance Precision: 1</span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance Recall: 1</span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance F1Score: 1</span>
+									</div>
+								</div>
+								<div class="swiper-slide">
+									<div class="spanLine flex">
+										<span>Model Type: <b>Scoll 3</b></span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance Accuracy: 1</span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance Precision: 1</span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance Recall: 1</span>
+									</div>
+									<div class="spanLine flex">
+										<span>Performance F1Score: 1</span>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+						</div>
+						scoll end-->
+						<div class="spanLine flex">
+							<span>
+								<h:link class="button-filter" value = "View Detail" outcome = "faces/detail.xhtml?applicationID=#{as.application}">
+									<!--<f:param name="applicationIndex" value="#{status.index}" /> -->
+								</h:link>
+							</span>
+						</div>
+					</div>
+				</ui:repeat>
+				</div>
+			</div>
+		</div>
+	</div>
+</h:form>
+</h:body>
+</html>

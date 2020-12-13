@@ -1,0 +1,325 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<meta name="viewport"
+		content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<script src="js/jquery.min.js"></script>
+	<script src="js/font.js"></script>
+	<script src="js/main.js"></script>
+</h:head>
+
+<h:body>
+	<div class="headBack flex a-center">
+		<a href="index.xhtml" class="flex a-center">
+			<div class="iconBack"></div> Back
+		</a>
+	</div>
+	<div class="subMain">
+		<div class="overview">
+				<div class="spanLine flex">
+					<div class="icon"></div>
+					<h1>#{detailController.applicationOverview.applicationName}</h1>
+				</div>
+				<br/>
+				<div class="spanLine flex">
+					<span>Application Domain:  <b>#{detailController.applicationOverview.skinCancerName}</b>&nbsp;<b>#{detailController.applicationOverview.musculoskeletalDisorderName}</b></span>
+				</div>
+				<div class="spanLine flex">
+					<span>Data Set Name: <b>#{detailController.applicationOverview.dataName}</b></span>
+				</div>
+				<div class="spanLine flex">
+					<span>Data Feature: <b>#{detailController.applicationOverview.dataFeature}</b></span>
+				</div>
+				<div class="spanLine flex">
+					<span>Sensory Type: <b>#{detailController.applicationOverview.accelerometerName}</b>&nbsp;<b>#{detailController.applicationOverview.gyroscopeName}</b></span>
+				</div>
+				<!--  
+				<div class="spanLine flex">
+					<span>Model Name: <b>#{detailController.applicationOverview.modelName}</b></span>
+				</div>
+				-->
+				<div class="spanLine flex">
+					<span>Model Type: <b>#{detailController.applicationOverview.CNNTypeName}</b>&nbsp;<b>#{detailController.applicationOverview.RNNTypeName}</b></span>
+				</div>
+		</div>
+		<!--object_detection-->
+		<div class="overview">
+			<h2>Data Overview</h2>
+			<div class="spanLine flex">
+				<span>Data Set Name: <b>#{detailController.applicationOverview.dataName}</b></span>
+			</div>
+			<div class="spanLine flex">
+				<span>Sensory Type: <b>#{detailController.applicationOverview.accelerometerName}</b>&nbsp;<b>#{detailController.applicationOverview.gyroscopeName}</b></span>
+			</div>
+			<div class="spanLine flex">
+				<span>Data Description: <b>#{detailController.applicationOverview.dataDescription}</b></span>
+			</div>
+			<div class="spanLine flex">
+				<span>Data Resource: <b> <h:outputLink
+							value="#{detailController.applicationOverview.dataResource}">
+							<h:outputText value="Download Data" />
+						</h:outputLink>
+				</b>
+				</span>
+			</div>
+		</div>
+		
+		<div class="overview">
+			<h2>Model Overview</h2>
+			<!--  
+			<div class="spanLine flex">
+				<span>Model Name: <b>#{detailController.applicationOverview.modelName}</b></span>
+			</div>
+			-->
+			<div class="spanLine flex">
+				<span>Model Type: <b>#{detailController.applicationOverview.CNNTypeName}</b>&nbsp;<b>#{detailController.applicationOverview.RNNTypeName}</b></span>
+			</div>
+			<div class="spanLine flex">
+				<span>Model Description: <b>#{detailController.applicationOverview.modelDescription}</b></span>
+			</div>
+			<div class="spanLine flex">
+				<span>Model Resource: 
+					<b> 
+						<h:outputLink
+							value="#{detailController.applicationOverview.modelResource}">
+							<h:outputText value="Download Model" />
+						</h:outputLink>
+					</b>
+				</span>
+			</div>
+		<br/>	
+		<div class="overview">
+			<h3>Performance Metrics</h3>
+			<div class="spanLine flex">
+				<span>Performance Accuracy: <b>#{detailController.applicationOverview.performanceAccuracy}</b></span>
+			</div>
+			<div class="spanLine flex">
+				<span>Performance Precision: <b>#{detailController.applicationOverview.performancePrecision}</b></span>
+			</div>
+			<div class="spanLine flex">
+				<span>Performance Recall: <b>#{detailController.applicationOverview.performanceRecall}</b></span>
+			</div>
+			<div class="spanLine flex">
+				<span>Performance F1Score: <b>#{detailController.applicationOverview.performanceF1Score}</b></span>
+			</div>
+		</div>
+			<h2>Model Structure</h2>
+			<!--  
+			<div class="tableOverview">
+				<table>
+					<thead>
+						<tr>
+							<th align="left"><h:outputLabel id="LayerName"
+									value="Layer Name" /></th>
+							<th align="left"><h:outputLabel id="PreviousLayerName"
+									value="Previous Layer Name" /></th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat var="ms" value="#{detailController.modelStructureList}"
+							varStatus="status">
+							<h:form>
+							<tr>
+								<td><h:outputText id="outLayerName" value="#{ms.layerName}" />
+									&nbsp;
+									<h:link value = "View" target="_blank" outcome = "faces/layerDetail.xhtml?ID=#{ms.layerID}">
+									</h:link>
+								</td>
+								<td><h:outputText id="outPreviousLayerName"
+										value="#{ms.previousLayerName}" /> 
+									&nbsp;
+									<h:link value = "View" target="_blank" outcome = "faces/layerDetail.xhtml?ID=#{ms.previousLayerID}" rendered="#{ms.previousLayerID != null}" >
+									</h:link>
+								</td>
+							</tr>
+							</h:form>
+						</ui:repeat>
+					</tbody>
+				</table>
+			</div>
+			-->
+			<div class="layer-container">
+				<div>Input</div>
+				<div class="next"></div>
+				<ui:repeat var="sms" value="#{detailController.sortedModelStructureList}" varStatus="status">
+					<h:form>
+						<h:link class="layer-item" target="_blank" outcome = "faces/layerDetail.xhtml?ID=#{sms.layerID}">#{sms.layerName}</h:link>
+						<div class="next"></div>
+					</h:form>
+				</ui:repeat>
+				<div>Output</div>
+			</div>
+
+		</div>
+		
+		<div class="containedModels">
+			<h2>
+				Other Models <em></em>
+			</h2>
+			<div class="flex wrap jlr">
+				<ui:repeat var="sa"
+					value="#{detailController.sameApplicationOverviewList}"
+					varStatus="status">
+					<div class="item">
+						<div class="collectionTitle flex a-center">
+							<div class="iconWrap flex a-center j-center"><div class="icon"></div></div>
+							<div>#{sa.applicationName}</div>
+						</div>
+						<div class="spanLine flex">
+							<span>Model Type: <b>#{sa.CNNTypeName}</b>&nbsp;<b>#{sa.RNNTypeName}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Performance Accuracy: <b>#{sa.performanceAccuracy}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Performance Precision: <b>#{sa.performancePrecision}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Performance Recall: <b>#{sa.performanceRecall}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Performance F1Score: <b>#{sa.performanceF1Score}</b></span>
+						</div>
+						<br/>
+						<div class="spanLine flex">
+							<span>
+								<h:link value = "View Detail" outcome = "faces/detail.xhtml">
+									<f:param name = "applicationID" value = "#{sa.application}"></f:param>
+									<f:param name = "modelID" value = "#{sa.model}"></f:param>
+								</h:link>
+							</span>
+						</div>
+					</div>
+				</ui:repeat>
+			</div>
+		</div>
+		
+			<div class="containedModels">
+			<h2>
+				Related Models<em></em>
+			</h2>
+			<div class="flex wrap jlr">
+				<ui:repeat var="sds"
+					value="#{detailController.sameDataApplicationSummaryList}"
+					varStatus="status">
+					<div class="item">
+						<div class="collectionTitle flex a-center">
+							<div class="iconWrap flex a-center j-center"><div class="icon"></div></div>
+							<div>#{sds.applicationName}</div>
+						</div>
+						<div class="spanLine flex">
+							<span>Application Domain: <b>#{sds.skinCancerName}</b>&nbsp;<b>#{sds.musculoskeletalDisorderName}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Data Set Name: <b>#{sds.dataName}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Data Feature: <b>#{sds.dataFeature}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Sensory Type: <b>#{sds.accelerometerName}</b>&nbsp;<b>#{sds.gyroscopeName}</b></span>
+						</div>
+						<!--  
+						<div class="spanLine flex">
+							<span>Model Name: <b>#{ao.modelName}</b></span>
+						</div>
+						-->
+						<div class="spanLine flex">
+							<span>Model Number: <b>#{sds.modelNumber}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Model with Best Performance Metrics</span>
+						</div>
+						<div class="spanLine flex">
+							<span>Number of Layers: <b>#{sds.numberOfLayers}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Max Accuracy: <b>#{sds.maxAccuracy}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Max Precision: <b>#{sds.maxPrecision}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Max Recall: <b>#{sds.maxRecall}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Max F1Score: <b>#{sds.maxF1Score}</b></span>
+						</div>
+						<br/>
+						<div class="spanLine flex">
+							<span>
+								<h:link value = "View Detail" outcome = "faces/detail.xhtml?applicationID=#{sds.application}">
+									<f:param name = "applicationID" value = "#{sds.application}"></f:param>
+								</h:link>
+							</span>
+						</div>
+					</div>
+				</ui:repeat>
+			</div>
+			
+			
+			<div class="flex wrap jlr">
+				<ui:repeat var="sd"
+					value="#{detailController.sameDataApplicationOverviewList}"
+					varStatus="status">
+					<div class="item">
+						<div class="collectionTitle flex a-center">
+							<div class="iconWrap flex a-center j-center"><div class="icon"></div></div>
+							<div>#{sd.applicationName}</div>
+						</div>
+						<!--
+						<h2>Domain: #{sa.healthcareApplicationName}</h2>
+						<div class="spanLine flex">
+							<span>Data Set Name: <b>#{sa.dataName}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Data Feature: <b>#{sa.dataFeature}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Sensory Type: <b>#{sa.acceleratorName}</b>&nbsp;<b>#{sa.gyroscopeName}</b></span>
+						</div>  
+						<div class="spanLine flex">
+							<span>Model Name: <b>#{sa.modelName}</b></span>
+						</div>
+						<br/>
+						-->
+						<div class="spanLine flex">
+							<span>Model Type: <b>#{sd.CNNTypeName}</b>&nbsp;<b>#{sd.RNNTypeName}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Performance Accuracy: <b>#{sd.performanceAccuracy}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Performance Precision: <b>#{sd.performancePrecision}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Performance Recall: <b>#{sd.performanceRecall}</b></span>
+						</div>
+						<div class="spanLine flex">
+							<span>Performance F1Score: <b>#{sd.performanceF1Score}</b></span>
+						</div>
+						<br/>
+						<div class="spanLine flex">
+							<span>
+								<h:link value = "View Detail" outcome = "faces/detail.xhtml">
+									<f:param name = "applicationID" value = "#{sd.application}"></f:param>
+									<f:param name = "modelID" value = "#{sd.model}"></f:param>
+								</h:link>
+							</span>
+						</div>
+					</div>
+				</ui:repeat>
+			</div>
+		</div>
+		
+	</div>
+</h:body>
+</html>
