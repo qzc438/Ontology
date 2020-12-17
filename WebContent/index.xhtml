@@ -35,7 +35,7 @@
 			
 			<div class="search flex a-center" style="position: relative">
 				<h:form>
-					<input type="text" id="keyword" name = "keyword" value = "#{indexController.keyword}" placeholder="Search Application, Data or Model Name" />
+					<input type="text" id="keyword" name = "keyword" value = "#{indexController.keyword}" placeholder="Search Deep Learning Models" />
 					<h:commandButton value="" action="#{indexController.searchByKeywordAndFilters(filters)}"></h:commandButton>
 				</h:form>
 			</div>	
@@ -44,7 +44,7 @@
 		<div class="main jlr">
 			<div class="menubar"> 
 				<div class="menubarTitle flex a-center jlr">
-					<h:commandLink class="button-filter" value="Filter" action="#{indexController.searchByKeywordAndFilters(filters)}">
+					<h:commandLink class="button-filter" value="Search" action="#{indexController.searchByKeywordAndFilters(filters)}">
 					</h:commandLink>
 					<a class="button-clear" href="javascript:;">Clear all</a>
 				</div>
@@ -52,18 +52,20 @@
 					<!--menubarMixins-->
 					<div class="menubarMixins">
 					
-						<div class="modelformat flex">
-							<h5>Domain</h5>
-							<h:selectManyCheckbox value="#{filters.applicationDomains}">
-								<f:selectItems value="#{indexController.applicationDomainList}" var="ad" itemLabel="#{ad.applicationDomainName}" itemValue="#{ad.applicationDomainName}"/>
-							</h:selectManyCheckbox>
+						<div class="modelformat flex multi-line">
+							<div class="item-line">
+								<h5>Application Domain</h5>
+								<h:selectOneMenu stype = "width:250px;" class="menuSelectLong" value="#{filters.applicationDomains}">
+									<f:selectItem itemValue="#{null}" itemLabel="-- Select --" noSelectionOption="true"/>
+									<f:selectItems value="#{indexController.applicationDomainList}" var="ad" itemLabel="#{ad.applicationDomainName}" itemValue="#{ad.applicationDomainName}"/>
+								</h:selectOneMenu>
+							</div>
 						</div>
 						
 						<div class="modelformat flex multi-line">
 							<div class="item-line">
 								<!-- Accuracy -->
-								<h5>Performance</h5>
-								<h5 class="flex a-center" style="width: 65px;">Accuracy</h5>
+								<h5>Performance&nbsp;Accuracy</h5>
 								<div class="modelformatTab flex">
 									<!-- slider -->
 									<div id="accuracy-slider"></div>
@@ -80,8 +82,11 @@
 										<h:inputText border="0" value="#{filters.performancePrecision}"/>
 									</div>
 								</div>
+							</div>
+							
+							<div class="item-line">
 								<!-- Recall -->
-								<h5 class="flex a-center" style="width: 65px;">Recall</h5>
+								<h5 class="flex a-center" style="width: 150px;">Recall</h5>
 								<div class="modelformatTab flex">
 									<!-- slider -->
 									<div id="recall-slider"></div>
@@ -99,57 +104,61 @@
 									</div>
 								</div>
 							</div>
+							
+						</div>
+						
+						<div class="modelformat flex multi-line">
+							<div class="item-line">
+								<h5>Model Type</h5>
+								<h:selectOneMenu class="menuSelect" value="#{filters.modelTypes}">
+									<f:selectItem itemValue="#{null}" itemLabel="-- Select --" noSelectionOption="true"/>
+									<f:selectItems value="#{indexController.modelTypeList}" var="m" itemLabel="#{m.modelTypeName}" itemValue="#{m.modelTypeName}"/>
+								</h:selectOneMenu>
+								<h5 class="flex a-center" style="width: 232px;">Data Source Type</h5>
+								<h:selectOneMenu class="menuSelect" value="#{filters.sensoryTypes}">
+									<f:selectItem itemValue="#{null}" itemLabel="-- Select --" noSelectionOption="true"/>
+									<f:selectItems value="#{indexController.sensoryTypeList}" var="d" itemLabel="#{d.sensoryTypeName}" itemValue="#{d.sensoryTypeName}"/>
+									<f:selectItem itemValue="MedicalImagingDevice" itemLabel="MedicalImagingDevice"/>
+								</h:selectOneMenu>
+							</div>
 						</div>
 
-					  <div class="modelformat flex multi-line">
-					  	<div class="item-line">
-					  		<h5>Model Type</h5>
-							<h:selectManyCheckbox value="#{filters.modelTypes}">
-								<f:selectItems value="#{indexController.modelTypeList}" var="m" itemLabel="#{m.modelTypeName}" itemValue="#{m.modelTypeName}"/>
-							</h:selectManyCheckbox>
-							<h5 class="flex a-center" style="width: 250px; margin-right: 30px;">Sensory Type</h5>
-							<h:selectManyCheckbox value="#{filters.sensoryTypes}">
-								<f:selectItems value="#{indexController.sensoryTypeList}" var="d" itemLabel="#{d.sensoryTypeName}" itemValue="#{d.sensoryTypeName}"/>
-							</h:selectManyCheckbox>
-							<h5 class="flex a-center" style="width: 317px; margin-right: 40px;">Number of Layers</h5>
+						<div class="modelformat flex multi-line">
+						  	 <div class="item-line">
+								<h5>Number of Layers</h5>
 								<div class="modelformatTab flex">
-									<!--  
-									<div class="item flex a-center j-center">
-										<h:selectOneMenu>
-											<f:selectItem itemLabel="&gt;" itemValue="&gt;" />
-											<f:selectItem itemLabel="&lt;" itemValue="&lt;" />
-										</h:selectOneMenu>
-									</div>
-									-->
 									<!-- slider -->
 									<div id="numberOfLayer-slider"></div>
 									<div class="item flex a-center j-center">
 										<h:inputText border="0" value="#{filters.numberOfLayers}"/>
 									</div>
 								</div>
-							</div>
-						</div>
-						
-						<div class="modelformat flex multi-line">
-							<div class="item-line">
-								<h5>Layer Type</h5>
-								<h:selectManyCheckbox value="#{filters.layerTypes}">
+								<h5 class="flex a-center" style="width: 142px;">Layer Type</h5>
+								<h:selectOneMenu class="menuSelect" value="#{filters.layerTypes}">
+									<f:selectItem itemValue="#{null}" itemLabel="-- Select --" noSelectionOption="true"/>
 									<f:selectItems value="#{indexController.layerTypeList}" var="l" itemLabel="#{l.layerTypeName}" itemValue="#{l.layerTypeName}"/>
-								</h:selectManyCheckbox>
-								<h5 class="flex a-center" style="width: 165px;">Core Layer Type</h5>
-								<h:selectManyCheckbox value="#{filters.coreLayerTypes}">
-									<f:selectItems value="#{indexController.coreLayerTypeList}" var="cl" itemLabel="#{cl.coreLayerTypeName}" itemValue="#{cl.coreLayerTypeName}"/>
-								</h:selectManyCheckbox>
-								<h5 class="flex a-center" style="width: 180px;">Functional Layer Type</h5>
-								<h:selectManyCheckbox value="#{filters.functionalLayerTypes}">
-									<f:selectItems value="#{indexController.functionalLayerTypeList}" var="fl" itemLabel="#{fl.functionalLayerTypeName}" itemValue="#{fl.functionalLayerTypeName}"/>
-								</h:selectManyCheckbox>
-							</div>
+								</h:selectOneMenu>
+							 </div>		
 						</div>
+					
+						<div class="modelformat flex multi-line">
+						  	<div class="item-line">
+						  		<h5>Core Layer Type</h5>
+								<h:selectOneMenu class="menuSelect" value="#{filters.coreLayerTypes}">
+									<f:selectItem itemValue="#{null}" itemLabel="-- Select --" noSelectionOption="true"/>
+									<f:selectItems value="#{indexController.coreLayerTypeList}" var="cl" itemLabel="#{cl.coreLayerTypeName}" itemValue="#{cl.coreLayerTypeName}"/>
+								</h:selectOneMenu>
+								<h5 class="flex a-center" style="width: 232px;">Functional Layer Type</h5>
+								<h:selectOneMenu class="menuSelect" value="#{filters.functionalLayerTypes}">
+									<f:selectItem itemValue="#{null}" itemLabel="-- Select --" noSelectionOption="true"/>
+									<f:selectItems value="#{indexController.functionalLayerTypeList}" var="fl" itemLabel="#{fl.functionalLayerTypeName}" itemValue="#{fl.functionalLayerTypeName}"/>
+								</h:selectOneMenu>	
+						  	</div>
+						</div>
+					
 				</div>
 			</div>
 			</div>
-
 
 			<!--collectionWrap-->
 			<div class="collectionWrap jlr">
@@ -166,13 +175,14 @@
 							<span>Application Domain: <b>#{as.skinCancerName}</b>&nbsp;<b>#{as.musculoskeletalDisorderName}</b></span>
 						</div>
 						<div class="spanLine flex">
-							<span>Data Set Name:<b>#{as.dataName}</b></span>
+							<span>Data Set Name: <b>#{as.dataName}</b></span>
 						</div>
 						<div class="spanLine flex">
-							<span>Data Feature: <b>#{as.dataFeature}</b></span>
+							<span>Data Output: <b>#{as.dataFeature}</b></span>
 						</div>
 						<div class="spanLine flex">
-							<span>Sensory Type: <b>#{as.accelerometerName}</b>&nbsp;<b>#{as.gyroscopeName}</b></span>
+							<!--<span>Sensor Type: <b>#{as.accelerometerName}</b>&nbsp;<b>#{as.gyroscopeName}</b></span>-->
+							<span>Data Source Type: <b>#{as.accelerometerName}</b>,&nbsp;<b>#{as.gyroscopeName}</b></span>
 						</div>
 						<!--  
 						<div class="spanLine flex">
@@ -180,16 +190,14 @@
 						</div>
 						-->
 						<div class="spanLine flex">
-							<span>Model Number: <b>#{as.modelNumber}</b></span>
-						</div>
-						<div class="spanLine flex">
-							<span>Number of Layers: <b>#{as.numberOfLayers}</b></span>
+							<span>Model Number: <b>#{as.modelNumber}</b></span>&nbsp;&nbsp;<span>Number of Layers: <b>#{as.numberOfLayers}</b></span>
 						</div>
 						<div class="spanLine flex">
 							<span>Max Accuracy: <b>#{as.maxAccuracy}</b></span>&nbsp;&nbsp;<span>Max Precision: <b>#{as.maxPrecision}</b></span>
-							&nbsp;&nbsp;<span>Max Recall: <b>#{as.maxRecall}</b></span>&nbsp;&nbsp;<span>Max F1Score: <b>#{as.maxF1Score}</b></span>
 						</div>
-						<br/>
+						<div class="spanLine flex">
+							<span>Max Recall: <b>#{as.maxRecall}</b></span>&nbsp;&nbsp;<span>Max F1Score: <b>#{as.maxF1Score}</b></span>
+						</div>
 						<!-- cope this for 3 times to show scoll
 						<div class="swiper-container">
 							<div class="swiper-wrapper">

@@ -10,17 +10,17 @@ import javax.inject.Named;
 @RequestScoped
 public class Filters implements Serializable{
 	
-	private List<String> applicationDomains;
+	private String applicationDomains;
 
-	private List<String> sensoryTypes;
+	private String sensoryTypes;
 	
-	private List<String> modelTypes;
+	private String modelTypes;
 	
-	private List<String> layerTypes;
+	private String layerTypes;
 	
-	private List<String> coreLayerTypes;
+	private String coreLayerTypes;
 	
-	private List<String> functionalLayerTypes;
+	private String functionalLayerTypes;
 	
 	private Integer numberOfLayers;
 	
@@ -34,10 +34,9 @@ public class Filters implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Filters(List<String> applicationDomains, List<String> sensoryTypes, List<String> modelTypes,
-			List<String> layerTypes, List<String> coreLayerTypes, List<String> functionalLayerTypes,
-			Integer numberOfLayers, Float performanceAccuracy, Float performancePrecision, Float performanceRecall,
-			Float performanceF1Score) {
+	public Filters(String applicationDomains, String sensoryTypes, String modelTypes, String layerTypes,
+			String coreLayerTypes, String functionalLayerTypes, Integer numberOfLayers, Float performanceAccuracy,
+			Float performancePrecision, Float performanceRecall, Float performanceF1Score) {
 		super();
 		this.applicationDomains = applicationDomains;
 		this.sensoryTypes = sensoryTypes;
@@ -52,51 +51,51 @@ public class Filters implements Serializable{
 		this.performanceF1Score = performanceF1Score;
 	}
 
-	public List<String> getApplicationDomains() {
+	public String getApplicationDomains() {
 		return applicationDomains;
 	}
 
-	public void setApplicationDomains(List<String> applicationDomains) {
+	public void setApplicationDomains(String applicationDomains) {
 		this.applicationDomains = applicationDomains;
 	}
 
-	public List<String> getSensoryTypes() {
+	public String getSensoryTypes() {
 		return sensoryTypes;
 	}
 
-	public void setSensoryTypes(List<String> sensoryTypes) {
+	public void setSensoryTypes(String sensoryTypes) {
 		this.sensoryTypes = sensoryTypes;
 	}
 
-	public List<String> getModelTypes() {
+	public String getModelTypes() {
 		return modelTypes;
 	}
 
-	public void setModelTypes(List<String> modelTypes) {
+	public void setModelTypes(String modelTypes) {
 		this.modelTypes = modelTypes;
 	}
 
-	public List<String> getLayerTypes() {
+	public String getLayerTypes() {
 		return layerTypes;
 	}
 
-	public void setLayerTypes(List<String> layerTypes) {
+	public void setLayerTypes(String layerTypes) {
 		this.layerTypes = layerTypes;
 	}
 
-	public List<String> getCoreLayerTypes() {
+	public String getCoreLayerTypes() {
 		return coreLayerTypes;
 	}
 
-	public void setCoreLayerTypes(List<String> coreLayerTypes) {
+	public void setCoreLayerTypes(String coreLayerTypes) {
 		this.coreLayerTypes = coreLayerTypes;
 	}
 
-	public List<String> getFunctionalLayerTypes() {
+	public String getFunctionalLayerTypes() {
 		return functionalLayerTypes;
 	}
 
-	public void setFunctionalLayerTypes(List<String> functionalLayerTypes) {
+	public void setFunctionalLayerTypes(String functionalLayerTypes) {
 		this.functionalLayerTypes = functionalLayerTypes;
 	}
 

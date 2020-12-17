@@ -691,7 +691,7 @@ public class OntologyIndividual {
 		
 		// application
 		RDFIndividual applicationIndividual = applicationClass.createOWLIndividual("application" + "-" + UUIDUtil.creatUUID());
-		applicationIndividual.addPropertyValue(applicationNameProperty, "Classification of Human Activities Using CNN");
+		applicationIndividual.addPropertyValue(applicationNameProperty, "Human Activity Recognition 2");
 		// RDFIndividual applicationDomainIndividual = applicationDomainClass.createOWLIndividual("applicationDomain"+"-"+ UUIDUtil.creatUUID());
 		// applicationIndividual.addPropertyValue(hasApplicationDomainProperty, applicationDomainIndividual);
 		// applicationDomainIndividual.addPropertyValue(isApplicationDomainOfProperty, applicationIndividual);
@@ -716,7 +716,7 @@ public class OntologyIndividual {
 			// model
 			RDFIndividual modelIndividual = modelClass.createOWLIndividual("model" + "-" + UUIDUtil.creatUUID());
 			modelIndividual.addPropertyValue(modelNameProperty, "CNN");
-			modelIndividual.addPropertyValue(modelDescriptionProperty, "Keras backend");
+			modelIndividual.addPropertyValue(modelDescriptionProperty, "Keras");
 			modelIndividual.addPropertyValue(modelResourceProperty, "http://www.deep-learning-ontology.com:8080/model1"+ i +".json");
 			// application has many models
 			applicationIndividual.addPropertyValue(hasModelProperty, modelIndividual);
@@ -1144,7 +1144,7 @@ public class OntologyIndividual {
 		
 		// application
 		RDFIndividual applicationIndividual2 = applicationClass.createOWLIndividual("application" + "-" + UUIDUtil.creatUUID());
-		applicationIndividual2.addPropertyValue(applicationNameProperty, "Classification of Human Activities Using RNN");
+		applicationIndividual2.addPropertyValue(applicationNameProperty, "Human Activity Recognition");
 		// RDFIndividual applicationDomainIndividual2 = applicationDomainClass.createOWLIndividual("applicationDomain"+"-"+ UUIDUtil.creatUUID());
 		// applicationIndividual2.addPropertyValue(hasApplicationDomainProperty, applicationDomainIndividual2);
 		// applicationDomainIndividual2.addPropertyValue(isApplicationDomainOfProperty, applicationIndividual2);
@@ -1165,7 +1165,7 @@ public class OntologyIndividual {
 			// model
 			RDFIndividual modelIndividual = modelClass.createOWLIndividual("model" + "-" + UUIDUtil.creatUUID());
 			modelIndividual.addPropertyValue(modelNameProperty, "RNN");
-			modelIndividual.addPropertyValue(modelDescriptionProperty, "Keras backend");
+			modelIndividual.addPropertyValue(modelDescriptionProperty, "TensorFlow");
 			modelIndividual.addPropertyValue(modelResourceProperty, "http://www.deep-learning-ontology.com:8080/model2"+ i +".json");
 			// application has many models
 			applicationIndividual2.addPropertyValue(hasModelProperty, modelIndividual);
@@ -1329,6 +1329,8 @@ public class OntologyIndividual {
 			// core layer type has layer1
 			RDFIndividual layerIndividual1 = recurrentLayerClass.createOWLIndividual("layer1" + "-" + UUIDUtil.creatUUID());
 			layerIndividual1.addPropertyValue(recurrentUnitsProperty, 100);
+			coreLayerTypeIndividual1.addPropertyValue(hasRecurrentLayerProperty, layerIndividual1);
+			layerIndividual1.addPropertyValue(isRecurrentLayerOfProperty, coreLayerTypeIndividual1);
 			
 			// layer 2 is dropout layer
 			

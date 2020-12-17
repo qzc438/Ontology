@@ -39,7 +39,7 @@
 					<span>Data Feature: <b>#{detailController.applicationOverview.dataFeature}</b></span>
 				</div>
 				<div class="spanLine flex">
-					<span>Sensory Type: <b>#{detailController.applicationOverview.accelerometerName}</b>&nbsp;<b>#{detailController.applicationOverview.gyroscopeName}</b></span>
+					<span>Sensor Type: <b>#{detailController.applicationOverview.accelerometerName}</b>&nbsp;<b>#{detailController.applicationOverview.gyroscopeName}</b></span>
 				</div>
 				<!--  
 				<div class="spanLine flex">
@@ -57,7 +57,7 @@
 				<span>Data Set Name: <b>#{detailController.applicationOverview.dataName}</b></span>
 			</div>
 			<div class="spanLine flex">
-				<span>Sensory Type: <b>#{detailController.applicationOverview.accelerometerName}</b>&nbsp;<b>#{detailController.applicationOverview.gyroscopeName}</b></span>
+				<span>Sensor Type: <b>#{detailController.applicationOverview.accelerometerName}</b>&nbsp;<b>#{detailController.applicationOverview.gyroscopeName}</b></span>
 			</div>
 			<div class="spanLine flex">
 				<span>Data Description: <b>#{detailController.applicationOverview.dataDescription}</b></span>
@@ -81,34 +81,16 @@
 			-->
 			<div class="spanLine flex">
 				<span>Model Type: <b>#{detailController.applicationOverview.CNNTypeName}</b>&nbsp;<b>#{detailController.applicationOverview.RNNTypeName}</b></span>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span>Backend: <b>#{detailController.applicationOverview.modelDescription}</b></span>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span><b><h:outputLink value="#{detailController.applicationOverview.modelResource}"><h:outputText value="Download" /></h:outputLink></b></span>
 			</div>
-			<div class="spanLine flex">
-				<span>Model Description: <b>#{detailController.applicationOverview.modelDescription}</b></span>
-			</div>
-			<div class="spanLine flex">
-				<span>Model Resource: 
-					<b> 
-						<h:outputLink
-							value="#{detailController.applicationOverview.modelResource}">
-							<h:outputText value="Download Model" />
-						</h:outputLink>
-					</b>
-				</span>
-			</div>
-		<br/>	
 		<div class="overview">
-			<h3>Performance Metrics</h3>
+			<h2>Performance Metrics</h2>
 			<div class="spanLine flex">
-				<span>Performance Accuracy: <b>#{detailController.applicationOverview.performanceAccuracy}</b></span>
-			</div>
-			<div class="spanLine flex">
-				<span>Performance Precision: <b>#{detailController.applicationOverview.performancePrecision}</b></span>
-			</div>
-			<div class="spanLine flex">
-				<span>Performance Recall: <b>#{detailController.applicationOverview.performanceRecall}</b></span>
-			</div>
-			<div class="spanLine flex">
-				<span>Performance F1Score: <b>#{detailController.applicationOverview.performanceF1Score}</b></span>
+				<span>Accuracy: <b>#{detailController.applicationOverview.performanceAccuracy}</b></span>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span>Precision: <b>#{detailController.applicationOverview.performancePrecision}</b></span>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span>Recall: <b>#{detailController.applicationOverview.performanceRecall}</b></span>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span>F1Score: <b>#{detailController.applicationOverview.performanceF1Score}</b></span>
 			</div>
 		</div>
 			<h2>Model Structure</h2>
@@ -161,10 +143,8 @@
 		</div>
 		
 		<div class="containedModels">
-			<h2>
-				Other Models <em></em>
-			</h2>
-			<div class="flex wrap jlr">
+			<h2>Other Train Models</h2>
+			<div class="flex wrap">
 				<ui:repeat var="sa"
 					value="#{detailController.sameApplicationOverviewList}"
 					varStatus="status">
@@ -191,7 +171,7 @@
 						<br/>
 						<div class="spanLine flex">
 							<span>
-								<h:link value = "View Detail" outcome = "faces/detail.xhtml">
+								<h:link class="button-filter" value = "View Detail" outcome = "faces/detail.xhtml">
 									<f:param name = "applicationID" value = "#{sa.application}"></f:param>
 									<f:param name = "modelID" value = "#{sa.model}"></f:param>
 								</h:link>
@@ -225,7 +205,7 @@
 							<span>Data Feature: <b>#{sds.dataFeature}</b></span>
 						</div>
 						<div class="spanLine flex">
-							<span>Sensory Type: <b>#{sds.accelerometerName}</b>&nbsp;<b>#{sds.gyroscopeName}</b></span>
+							<span>Sensor Type: <b>#{sds.accelerometerName}</b>&nbsp;<b>#{sds.gyroscopeName}</b></span>
 						</div>
 						<!--  
 						<div class="spanLine flex">

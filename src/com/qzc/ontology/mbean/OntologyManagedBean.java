@@ -359,12 +359,12 @@ public class OntologyManagedBean implements Serializable {
 				+ "  	?d ?e ?f.\r\n";
 		if (filters != null) {
 			// find all filters
-			List<String> applicationDomains = filters.getApplicationDomains();
-			List<String> sensoryTypes = filters.getSensoryTypes();
-			List<String> modelTypes = filters.getModelTypes();
-			List<String> layerTypes = filters.getLayerTypes();
-			List<String> coreLayerTypes = filters.getCoreLayerTypes();
-			List<String> functionalLayerTypes = filters.getFunctionalLayerTypes();
+			String applicationDomains = filters.getApplicationDomains();
+			String sensoryTypes = filters.getSensoryTypes();
+			String modelTypes = filters.getModelTypes();
+			String layerTypes = filters.getLayerTypes();
+			String coreLayerTypes = filters.getCoreLayerTypes();
+			String functionalLayerTypes = filters.getFunctionalLayerTypes();
 			// find all performance, /100 because of the percentage
 			// Float performanceAccurcay = filters.getPerformanceAccuracy()/100;
 			// Float performancePrecision = filters.getPerformancePrecision()/100;
@@ -373,59 +373,78 @@ public class OntologyManagedBean implements Serializable {
 
 			// filter by application domain
 			if (applicationDomains != null) {
-				for (String str : applicationDomains) {
-					if (str.equals("SkinCancer")) {
-						sparql += "FILTER (?skinCancerName != \"\")\r\n";
-					}
-					if (str.equals("MusculoskeletalDisorder")) {
-						sparql += "FILTER (?musculoskeletalDisorderName != \"\")\r\n";
-					}
+//				for (String str : applicationDomains) {
+//					if (str.equals("SkinCancer")) {
+//						sparql += "FILTER (?skinCancerName != \"\")\r\n";
+//					}
+//					if (str.equals("MusculoskeletalDisorder")) {
+//						sparql += "FILTER (?musculoskeletalDisorderName != \"\")\r\n";
+//					}
+//				}
+				if (applicationDomains.equals("SkinCancer")) {
+					sparql += "FILTER (?skinCancerName != \"\")\r\n";
+				}
+				if (applicationDomains.equals("MusculoskeletalDisorder")) {
+					sparql += "FILTER (?musculoskeletalDisorderName != \"\")\r\n";
 				}
 			}
 			// filter by sensory type
 			if (sensoryTypes != null) {
-				for (String str : sensoryTypes) {
-					if (str.equals("Accelerometer")) {
-						sparql += "FILTER (?accelerometerName != \"\")\r\n";
-					}
-					if (str.equals("Gyroscope")) {
-						sparql += "FILTER (?gyroscopeName != \"\")\r\n";
-					}
+//				for (String str : sensoryTypes) {
+//					if (str.equals("Accelerometer")) {
+//						sparql += "FILTER (?accelerometerName != \"\")\r\n";
+//					}
+//					if (str.equals("Gyroscope")) {
+//						sparql += "FILTER (?gyroscopeName != \"\")\r\n";
+//					}
+//				}
+				if (sensoryTypes.equals("Accelerometer")) {
+					sparql += "FILTER (?accelerometerName != \"\")\r\n";
+				}
+				if (sensoryTypes.equals("Gyroscope")) {
+					sparql += "FILTER (?gyroscopeName != \"\")\r\n";
 				}
 			}
 			// filter model type
 			if (modelTypes != null) {
-				for (String str : modelTypes) {
-					if (str.equals("CNN")) {
-						sparql += "FILTER (?CNNTypeName != \"\")\r\n";
-					}
-					if (str.equals("RNN")) {
-						sparql += "FILTER (?RNNTypeName != \"\")\r\n";
-					}
+//				for (String str : modelTypes) {
+//					if (str.equals("CNN")) {
+//						sparql += "FILTER (?CNNTypeName != \"\")\r\n";
+//					}
+//					if (str.equals("RNN")) {
+//						sparql += "FILTER (?RNNTypeName != \"\")\r\n";
+//					}
+//				}
+				if (modelTypes.equals("CNN")) {
+					sparql += "FILTER (?CNNTypeName != \"\")\r\n";
+				}
+				if (modelTypes.equals("RNN")) {
+					sparql += "FILTER (?RNNTypeName != \"\")\r\n";
 				}
 			}
 			// filter by layer type
 			String layerTypeFilter = "";
 			if (layerTypes != null) {
-				for (String str : layerTypes) {
+//				for (String str : layerTypes) {
 //					if (str.equals("FunctionalLayer")) {
-//						layerTypeFilter += "?modelLayerhasSublayer = onto:hasFunctionalLayer ||";
+//						layerTypeFilter += "?a = onto:hasFunctionalLayer ||";
 //					}
 //					if (str.equals("CoreLayer")) {
-//						layerTypeFilter += "?modelLayerhasSublayer = onto:hasCoreLayer ||";
+//						layerTypeFilter += "?a = onto:hasCoreLayer ||";
 //					}
-					if (str.equals("FunctionalLayer")) {
-						layerTypeFilter += "?a = onto:hasFunctionalLayer ||";
-					}
-					if (str.equals("CoreLayer")) {
-						layerTypeFilter += "?a = onto:hasCoreLayer ||";
-					}
+//				}
+				if (layerTypes.equals("FunctionalLayer")) {
+					layerTypeFilter += "?a = onto:hasFunctionalLayer ||";
+				}
+				if (layerTypes.equals("CoreLayer")) {
+					layerTypeFilter += "?a = onto:hasCoreLayer ||";
 				}
 				if (layerTypeFilter.length() - 2 > 0) {
 					layerTypeFilter = layerTypeFilter.substring(0, layerTypeFilter.length() - 2);
-					sparql += "FILTER (" + layerTypeFilter + ")\r\n";
+				sparql += "FILTER (" + layerTypeFilter + ")\r\n";
 				}
 			}
+			
 //			// filter by functional layer
 //			String functionalLayerFilter = "";
 //			if (functionalLayerTypes != null) {
@@ -468,49 +487,49 @@ public class OntologyManagedBean implements Serializable {
 			// filter by functional layer
 			String functionalLayerFilter = "";
 			if (functionalLayerTypes != null) {
-				for (String str : functionalLayerTypes) {
+//				for (String str : functionalLayerTypes) {
 //					if (str.equals("ReshapingLayer")) {
-//						functionalLayerFilter += "?coreFunctionalhasSublayer = onto:hasReshapingLayer ||";
+//						functionalLayerFilter += "?c = onto:hasReshapingLayer ||";
 //					}
 //					if (str.equals("PoolingLayer")) {
-//						functionalLayerFilter += "?coreFunctionalhasSublayer = onto:hasPoolingLayer ||";
+//						functionalLayerFilter += "?c = onto:hasPoolingLayer ||";
 //					}
 //					if (str.equals("DropoutLayer")) {
-//						functionalLayerFilter += "?coreFunctionalhasSublayer = onto:hasDropoutLayer ||";
+//						functionalLayerFilter += "?c = onto:hasDropoutLayer ||";
 //					}
-					if (str.equals("ReshapingLayer")) {
-						functionalLayerFilter += "?c = onto:hasReshapingLayer ||";
-					}
-					if (str.equals("PoolingLayer")) {
-						functionalLayerFilter += "?c = onto:hasPoolingLayer ||";
-					}
-					if (str.equals("DropoutLayer")) {
-						functionalLayerFilter += "?c = onto:hasDropoutLayer ||";
-					}
+//				}
+				if (functionalLayerTypes.equals("ReshapingLayer")) {
+					functionalLayerFilter += "?c = onto:hasReshapingLayer ||";
+				}
+				if (functionalLayerTypes.equals("PoolingLayer")) {
+					functionalLayerFilter += "?c = onto:hasPoolingLayer ||";
+				}
+				if (functionalLayerTypes.equals("DropoutLayer")) {
+					functionalLayerFilter += "?c = onto:hasDropoutLayer ||";
 				}
 			}
 			// filter by core layer
 			String coreLayerFilter = "";
 			if (coreLayerTypes != null) {
-				for (String str : coreLayerTypes) {
+//				for (String str : coreLayerTypes) {
 //					if (str.equals("ConvolutionLayer")) {
-//						coreLayerFilter += "?coreLayerTypehasSublayer = onto:hasConvolutionLayer ||";
+//						coreLayerFilter += "?e = onto:hasConvolutionLayer ||";
 //					}
 //					if (str.equals("RecurrentLayer")) {
-//						coreLayerFilter += "?coreLayerTypehasSublayer = onto:hasRecurrentLayer ||";
+//						coreLayerFilter += "?e = onto:hasRecurrentLayer ||";
 //					}
 //					if (str.equals("DenseLayer")) {
-//						coreLayerFilter += "?coreLayerTypehasSublayer = onto:hasDenseLayer ||";
+//						coreLayerFilter += "?e = onto:hasDenseLayer ||";
 //					}
-					if (str.equals("ConvolutionLayer")) {
-						coreLayerFilter += "?e = onto:hasConvolutionLayer ||";
-					}
-					if (str.equals("RecurrentLayer")) {
-						coreLayerFilter += "?e = onto:hasRecurrentLayer ||";
-					}
-					if (str.equals("DenseLayer")) {
-						coreLayerFilter += "?e = onto:hasDenseLayer ||";
-					}
+//				}
+				if (coreLayerTypes.equals("ConvolutionLayer")) {
+					coreLayerFilter += "?e = onto:hasConvolutionLayer ||";
+				}
+				if (coreLayerTypes.equals("RecurrentLayer")) {
+					coreLayerFilter += "?e = onto:hasRecurrentLayer ||";
+				}
+				if (coreLayerTypes.equals("DenseLayer")) {
+					coreLayerFilter += "?e = onto:hasDenseLayer ||";
 				}
 			}
 			
