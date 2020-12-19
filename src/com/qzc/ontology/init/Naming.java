@@ -72,20 +72,25 @@ public class Naming {
 	public static String DATA_PROPERTY_DATA_FEATURE = "dataFeature";
 	public static String DATA_PROPERTY_DATA_DESCRIPTION = "dataDescription";
 	public static String DATA_PROPERTY_DATA_RESOURCE = "dataResource";
-	// has sensory type
-	public static String CLASS_SENSORY_TYPE = "SensoryType";
-	public static String OBJECT_PROPERTY_HAS_SENSORY_TYPE = "hasSensoryType";
-	public static String OBJECT_PROPERTY_IS_SENSORY_TYPE_OF = "isSensoryTypeOf";
+	// has data source type
+	public static String CLASS_DATA_SOURCE_TYPE = "DataSourceType";
+	public static String OBJECT_PROPERTY_HAS_DATA_SOURCE_TYPE = "hasDataSourceType";
+	public static String OBJECT_PROPERTY_IS_DATA_SOURCE_TYPE_OF = "isDataSourceTypeOf";
 	// has accelerometer data
-	public static String CLASS_SENSORY_TYPE_ACCELEROMETER = "Accelerometer";
+	public static String CLASS_DATA_SOURCE_TYPE_ACCELEROMETER = "Accelerometer";
 	public static String DATA_PROPERTY_ACCELEROMETER_NAME = "accelerometerName";
 	public static String OBJECT_PROPERTY_HAS_ACCELEROMETER = "hasAccelerometer";
 	public static String OBJECT_PROPERTY_IS_ACCELEROMETER_OF = "isAccelerometerOf";
 	// has gyroscope data
-	public static String CLASS_DATA_TYPE_GYROSCOPE = "Gyroscope";
+	public static String CLASS_DATA_SOURCE_TYPE_GYROSCOPE = "Gyroscope";
 	public static String DATA_PROPERTY_GYROSCOPE_NAME = "gyroscopeName";
 	public static String OBJECT_PROPERTY_HAS_GYROSCOPE = "hasGyroscope";
 	public static String OBJECT_PROPERTY_IS_GYROSCOPE_OF = "isGyroscopeOf";
+	// has medical imaging device data
+	public static String CLASS_DATA_SOURCE_TYPE_MEDICALIMAGINGDEVICE = "MedicalImagingDevice";
+	public static String DATA_PROPERTY_MEDICALIMAGINGDEVICE_NAME = "medicalImagingDeviceName";
+	public static String OBJECT_PROPERTY_HAS_MEDICALIMAGINGDEVICE = "hasMedicalImagingDevice";
+	public static String OBJECT_PROPERTY_IS_MEDICALIMAGINGDEVICE_OF = "isMedicalImagingDeviceOf";
 
 	// model
 	public static String CLASS_MODEL = "DeepLearningModel";

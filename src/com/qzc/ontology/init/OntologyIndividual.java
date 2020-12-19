@@ -58,24 +58,32 @@ public class OntologyIndividual {
 	OWLDatatypeProperty dataDescriptionProperty;
 	// data resource
 	OWLDatatypeProperty dataResourceProperty;
-	// has data type
-	OWLObjectProperty hasSensoryTypeProperty;
-	OWLObjectProperty isSensoryTypeOfProperty;
-	OWLNamedClass sensoryTypeClass;
-	// accelerometer
-	OWLNamedClass sensoryTypeAccelerometerClass;
+	// has data source type
+	OWLObjectProperty hasDataSourceTypeProperty;
+	OWLObjectProperty isDataSourceTypeOfProperty;
+	OWLNamedClass dataSourceTypeClass;
+	// accelerometer data
+	OWLNamedClass dataSourceTypeAccelerometerClass;
 	// accelerometer data name
 	OWLDatatypeProperty accelerometerNameProperty;
 	// has accelerometer data
 	OWLObjectProperty hasAccelerometerProperty;
 	OWLObjectProperty isAccelerometerOfProperty;
 	// gyroscope data
-	OWLNamedClass sensoryTypeGyroscopeClass;
+	OWLNamedClass dataSourceTypeGyroscopeClass;
 	// gyroscope data name
 	OWLDatatypeProperty gyroscopeNameProperty;
 	// has gyroscope data
 	OWLObjectProperty hasGyroscopeProperty;
 	OWLObjectProperty isGyroscopeOfProperty;
+	// medical imaging device data
+	OWLNamedClass dataSourceTypeMedicalImagingDeviceClass;
+	// medical imaging device data name
+	OWLDatatypeProperty medicalImagingDeviceNameProperty;
+	// has medical imaging device data 
+	OWLObjectProperty hasMedicalImagingDeviceProperty;
+	// is medical imaging device data
+	OWLObjectProperty isMedicalImagingDeviceOfProperty;
 	
 	
 	// model
@@ -369,20 +377,25 @@ public class OntologyIndividual {
 		dataDescriptionProperty = owlModel.getOWLDatatypeProperty(Naming.DATA_PROPERTY_DATA_DESCRIPTION);
 		// data resource
 		dataResourceProperty = owlModel.getOWLDatatypeProperty(Naming.DATA_PROPERTY_DATA_RESOURCE);
-		// has sensory type
-		hasSensoryTypeProperty = owlModel.getOWLObjectProperty (Naming.OBJECT_PROPERTY_HAS_SENSORY_TYPE);
-		isSensoryTypeOfProperty = owlModel.getOWLObjectProperty (Naming.OBJECT_PROPERTY_HAS_SENSORY_TYPE);
-		sensoryTypeClass = owlModel.getOWLNamedClass(Naming.CLASS_SENSORY_TYPE);
+		// has data source type
+		hasDataSourceTypeProperty = owlModel.getOWLObjectProperty (Naming.OBJECT_PROPERTY_HAS_DATA_SOURCE_TYPE);
+		isDataSourceTypeOfProperty = owlModel.getOWLObjectProperty (Naming.OBJECT_PROPERTY_HAS_DATA_SOURCE_TYPE);
+		dataSourceTypeClass = owlModel.getOWLNamedClass(Naming.CLASS_DATA_SOURCE_TYPE);
 		// has accelerometer
-		sensoryTypeAccelerometerClass = owlModel.getOWLNamedClass(Naming.CLASS_SENSORY_TYPE_ACCELEROMETER);
+		dataSourceTypeAccelerometerClass = owlModel.getOWLNamedClass(Naming.CLASS_DATA_SOURCE_TYPE_ACCELEROMETER);
 		accelerometerNameProperty = owlModel.getOWLDatatypeProperty(Naming.DATA_PROPERTY_ACCELEROMETER_NAME);
 		hasAccelerometerProperty = owlModel.getOWLObjectProperty(Naming.OBJECT_PROPERTY_HAS_ACCELEROMETER);
 		isAccelerometerOfProperty = owlModel.getOWLObjectProperty(Naming.OBJECT_PROPERTY_IS_ACCELEROMETER_OF);
 		// has gyroscope
-		sensoryTypeGyroscopeClass = owlModel.getOWLNamedClass(Naming.CLASS_DATA_TYPE_GYROSCOPE);
+		dataSourceTypeGyroscopeClass = owlModel.getOWLNamedClass(Naming.CLASS_DATA_SOURCE_TYPE_GYROSCOPE);
 		gyroscopeNameProperty = owlModel.getOWLDatatypeProperty(Naming.DATA_PROPERTY_GYROSCOPE_NAME);
 		hasGyroscopeProperty = owlModel.getOWLObjectProperty(Naming.OBJECT_PROPERTY_HAS_GYROSCOPE);
 		isGyroscopeOfProperty = owlModel.getOWLObjectProperty(Naming.OBJECT_PROPERTY_IS_GYROSCOPE_OF);
+		// has medical imaging device
+		dataSourceTypeMedicalImagingDeviceClass = owlModel.getOWLNamedClass(Naming.CLASS_DATA_SOURCE_TYPE_MEDICALIMAGINGDEVICE);
+		medicalImagingDeviceNameProperty = owlModel.getOWLDatatypeProperty(Naming.DATA_PROPERTY_MEDICALIMAGINGDEVICE_NAME);
+		hasMedicalImagingDeviceProperty = owlModel.getOWLObjectProperty(Naming.OBJECT_PROPERTY_HAS_MEDICALIMAGINGDEVICE);
+		isMedicalImagingDeviceOfProperty = owlModel.getOWLObjectProperty(Naming.OBJECT_PROPERTY_IS_MEDICALIMAGINGDEVICE_OF);
 		
 		// model
 		modelClass = owlModel.getOWLNamedClass(Naming.CLASS_MODEL);
@@ -666,32 +679,27 @@ public class OntologyIndividual {
 		 */
 		// data
 		RDFIndividual dataIndividual = dataClass.createOWLIndividual("data" + "-" + UUIDUtil.creatUUID());
-		dataIndividual.addPropertyValue(dataNameProperty, "Human Activity Recognition Using Smartphones Data Set");
-		dataIndividual.addPropertyValue(dataFeatureProperty, "walking, walking_upstairs, walking_downstairs, sitting, standing, laying");
-		String dataDescription = "The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data.\r\n" + 
-				"\r\n" + 
-				"The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.\r\n";
+		dataIndividual.addPropertyValue(dataNameProperty, "Segmented Nuclei Images");
+		dataIndividual.addPropertyValue(dataFeatureProperty, "cell nuceli");
+		String dataDescription = "This dataset contains a large number of segmented nuclei images. "
+				+ "The images were acquired under a variety of conditions and vary in the cell type, magnification, and imaging modality (brightfield vs. fluorescence). "
+				+ "The dataset is designed to challenge an algorithm's ability to generalize across these variations.";
 		dataIndividual.addPropertyValue(dataDescriptionProperty, dataDescription);
-		dataIndividual.addPropertyValue(dataResourceProperty,"http://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI HAR Dataset.zip");
+		dataIndividual.addPropertyValue(dataResourceProperty,"https://www.kaggle.com/c/data-science-bowl-2018/data");
 		// data has data type
-		RDFIndividual sensoryTypeIndividual = sensoryTypeClass.createOWLIndividual("senoryType" + "-" + UUIDUtil.creatUUID());
-		dataIndividual.addPropertyValue (hasSensoryTypeProperty,sensoryTypeIndividual);
-		sensoryTypeIndividual.addPropertyValue(isSensoryTypeOfProperty, dataIndividual);
-		// data type has accelerometer data
-		RDFIndividual accelerometerIndividual = sensoryTypeAccelerometerClass.createOWLIndividual("accelerometer" + "-" + UUIDUtil.creatUUID());
-		accelerometerIndividual.addPropertyValue(accelerometerNameProperty, "Accelerometer");
-		sensoryTypeIndividual.addPropertyValue(hasAccelerometerProperty,accelerometerIndividual);
-		accelerometerIndividual.addPropertyValue(isAccelerometerOfProperty,sensoryTypeIndividual);
-		// data type has gyroscope data
-		RDFIndividual gyroscopeIndividual = sensoryTypeGyroscopeClass.createOWLIndividual("gyroscope" + "-" + UUIDUtil.creatUUID());
-		gyroscopeIndividual.addPropertyValue(gyroscopeNameProperty,"Gyroscope");
-		sensoryTypeIndividual.addPropertyValue(hasGyroscopeProperty,gyroscopeIndividual);
-		gyroscopeIndividual.addPropertyValue(isGyroscopeOfProperty,sensoryTypeIndividual);
+		RDFIndividual dataSourceTypeIndividual = dataSourceTypeClass.createOWLIndividual("senoryType" + "-" + UUIDUtil.creatUUID());
+		dataIndividual.addPropertyValue (hasDataSourceTypeProperty,dataSourceTypeIndividual);
+		dataSourceTypeIndividual.addPropertyValue(isDataSourceTypeOfProperty, dataIndividual);
+		// data type has medical imaging device data
+		RDFIndividual medicalImagingDeviceIndividual = dataSourceTypeMedicalImagingDeviceClass.createOWLIndividual("medicalImagingDevice" + "-" + UUIDUtil.creatUUID());
+		medicalImagingDeviceIndividual.addPropertyValue(medicalImagingDeviceNameProperty, "Medical Imaging Device");
+		dataSourceTypeIndividual.addPropertyValue(hasMedicalImagingDeviceProperty,medicalImagingDeviceIndividual);
+		medicalImagingDeviceIndividual.addPropertyValue(isMedicalImagingDeviceOfProperty,dataSourceTypeIndividual);
 		
 		
 		// application
 		RDFIndividual applicationIndividual = applicationClass.createOWLIndividual("application" + "-" + UUIDUtil.creatUUID());
-		applicationIndividual.addPropertyValue(applicationNameProperty, "Human Activity Recognition 2");
+		applicationIndividual.addPropertyValue(applicationNameProperty, "Cell Nuclei Detection");
 		// RDFIndividual applicationDomainIndividual = applicationDomainClass.createOWLIndividual("applicationDomain"+"-"+ UUIDUtil.creatUUID());
 		// applicationIndividual.addPropertyValue(hasApplicationDomainProperty, applicationDomainIndividual);
 		// applicationDomainIndividual.addPropertyValue(isApplicationDomainOfProperty, applicationIndividual);
@@ -703,10 +711,10 @@ public class OntologyIndividual {
 //		applicationSkinCancerIndividual.addPropertyValue(skinCancerNameProperty, "Skin Cancer");
 //		applicationHealthcareIndividual.addPropertyValue(hasSkinCancerProperty, applicationSkinCancerIndividual);
 //		applicationSkinCancerIndividual.addPropertyValue(isSkinCancerOfProperty, applicationHealthcareIndividual);
-		RDFIndividual applicationMusculoskeletalDisorderIndividual = musculoskeletalDisorderClass.createOWLIndividual("applicationMusculoskeletalDisorder"+"-"+ UUIDUtil.creatUUID());
-		applicationMusculoskeletalDisorderIndividual.addPropertyValue(musculoskeletalDisorderNameProperty, "Musculoskeletal Disorder");
-		applicationHealthcareIndividual.addPropertyValue(hasMusculoskeletalDisorderProperty, applicationMusculoskeletalDisorderIndividual);
-		applicationMusculoskeletalDisorderIndividual.addPropertyValue(isMusculoskeletalDisorderOfProperty, applicationHealthcareIndividual);
+		RDFIndividual applicationSkinCancerIndividual = skinCancerClass.createOWLIndividual("applicationSkinCancer"+"-"+ UUIDUtil.creatUUID());
+		applicationSkinCancerIndividual.addPropertyValue(skinCancerNameProperty, "Skin Cancer");
+		applicationHealthcareIndividual.addPropertyValue(hasSkinCancerProperty, applicationSkinCancerIndividual);
+		applicationSkinCancerIndividual.addPropertyValue(isSkinCancerOfProperty, applicationHealthcareIndividual);
 		
 		// application has data
 		applicationIndividual.addPropertyValue(hasDataProperty, dataIndividual);
@@ -1142,6 +1150,31 @@ public class OntologyIndividual {
 			modelLayerIndividual6.addPropertyValue(isPreviousLayerOfProperty, modelLayerIndividual7);
 		}
 		
+		
+		// data
+		RDFIndividual dataIndividual2 = dataClass.createOWLIndividual("data" + "-" + UUIDUtil.creatUUID());
+		dataIndividual2.addPropertyValue(dataNameProperty, "Human Activity Recognition Using Smartphones Data Set");
+		dataIndividual2.addPropertyValue(dataFeatureProperty, "walking, walking_upstairs, walking_downstairs, sitting, standing, laying");
+		String dataDescription2 = "The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data.\r\n" + 
+				"\r\n" + 
+				"The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.\r\n";
+		dataIndividual2.addPropertyValue(dataDescriptionProperty, dataDescription2);
+		dataIndividual2.addPropertyValue(dataResourceProperty,"http://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI HAR Dataset.zip");
+		// data has data type
+		RDFIndividual dataSourceTypeIndividual2 = dataSourceTypeClass.createOWLIndividual("senoryType" + "-" + UUIDUtil.creatUUID());
+		dataIndividual2.addPropertyValue (hasDataSourceTypeProperty,dataSourceTypeIndividual2);
+		dataSourceTypeIndividual2.addPropertyValue(isDataSourceTypeOfProperty, dataIndividual2);
+		// data type has accelerometer data
+		RDFIndividual accelerometerIndividual = dataSourceTypeAccelerometerClass.createOWLIndividual("accelerometer" + "-" + UUIDUtil.creatUUID());
+		accelerometerIndividual.addPropertyValue(accelerometerNameProperty, "Accelerometer");
+		dataSourceTypeIndividual2.addPropertyValue(hasAccelerometerProperty,accelerometerIndividual);
+		accelerometerIndividual.addPropertyValue(isAccelerometerOfProperty,dataSourceTypeIndividual2);
+		// data type has gyroscope data
+		RDFIndividual gyroscopeIndividual = dataSourceTypeGyroscopeClass.createOWLIndividual("gyroscope" + "-" + UUIDUtil.creatUUID());
+		gyroscopeIndividual.addPropertyValue(gyroscopeNameProperty,"Gyroscope");
+		dataSourceTypeIndividual2.addPropertyValue(hasGyroscopeProperty,gyroscopeIndividual);
+		gyroscopeIndividual.addPropertyValue(isGyroscopeOfProperty,dataSourceTypeIndividual2);
+		
 		// application
 		RDFIndividual applicationIndividual2 = applicationClass.createOWLIndividual("application" + "-" + UUIDUtil.creatUUID());
 		applicationIndividual2.addPropertyValue(applicationNameProperty, "Human Activity Recognition");
@@ -1158,8 +1191,8 @@ public class OntologyIndividual {
 		applicationMusculoskeletalDisorderIndividual2.addPropertyValue(isMusculoskeletalDisorderOfProperty, applicationHealthcareIndividual2);
 		
 		// application has data
-		applicationIndividual2.addPropertyValue(hasDataProperty, dataIndividual);
-		dataIndividual.addPropertyValue(isDataOfProperty, applicationIndividual2);
+		applicationIndividual2.addPropertyValue(hasDataProperty, dataIndividual2);
+		dataIndividual2.addPropertyValue(isDataOfProperty, applicationIndividual2);
 		
 		for (int i = 0; i<10;i++) {
 			// model

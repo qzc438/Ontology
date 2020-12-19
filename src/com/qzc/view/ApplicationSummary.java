@@ -20,6 +20,7 @@ public class ApplicationSummary implements Serializable{
 	
 	private String accelerometerName;
 	private String gyroscopeName;
+	private String medicalImagingDeviceName;
 	
 	private Integer modelNumber;
 	
@@ -37,8 +38,8 @@ public class ApplicationSummary implements Serializable{
 	public ApplicationSummary(String application, String applicationName, String healthcareApplicationName,
 			String skinCancerName, String musculoskeletalDisorderName, String data, String dataName, String dataFeature,
 			String dataDescription, String dataResource, String accelerometerName, String gyroscopeName,
-			Integer modelNumber, Integer numberOfLayers, String maxAccuracy, String maxPrecision, String maxRecall,
-			String maxF1Score) {
+			String medicalImagingDeviceName, Integer modelNumber, Integer numberOfLayers, String maxAccuracy,
+			String maxPrecision, String maxRecall, String maxF1Score) {
 		super();
 		this.application = application;
 		this.applicationName = applicationName;
@@ -52,6 +53,7 @@ public class ApplicationSummary implements Serializable{
 		this.dataResource = dataResource;
 		this.accelerometerName = accelerometerName;
 		this.gyroscopeName = gyroscopeName;
+		this.medicalImagingDeviceName = medicalImagingDeviceName;
 		this.modelNumber = modelNumber;
 		this.numberOfLayers = numberOfLayers;
 		this.maxAccuracy = maxAccuracy;
@@ -156,6 +158,14 @@ public class ApplicationSummary implements Serializable{
 		this.gyroscopeName = gyroscopeName;
 	}
 
+	public String getMedicalImagingDeviceName() {
+		return medicalImagingDeviceName;
+	}
+
+	public void setMedicalImagingDeviceName(String medicalImagingDeviceName) {
+		this.medicalImagingDeviceName = medicalImagingDeviceName;
+	}
+
 	public Integer getModelNumber() {
 		return modelNumber;
 	}
@@ -211,8 +221,9 @@ public class ApplicationSummary implements Serializable{
 				+ ", musculoskeletalDisorderName=" + musculoskeletalDisorderName + ", data=" + data + ", dataName="
 				+ dataName + ", dataFeature=" + dataFeature + ", dataDescription=" + dataDescription + ", dataResource="
 				+ dataResource + ", accelerometerName=" + accelerometerName + ", gyroscopeName=" + gyroscopeName
-				+ ", modelNumber=" + modelNumber + ", numberOfLayers=" + numberOfLayers + ", maxAccuracy=" + maxAccuracy
-				+ ", maxPrecision=" + maxPrecision + ", maxRecall=" + maxRecall + ", maxF1Score=" + maxF1Score + "]";
+				+ ", medicalImagingDeviceName=" + medicalImagingDeviceName + ", modelNumber=" + modelNumber
+				+ ", numberOfLayers=" + numberOfLayers + ", maxAccuracy=" + maxAccuracy + ", maxPrecision="
+				+ maxPrecision + ", maxRecall=" + maxRecall + ", maxF1Score=" + maxF1Score + "]";
 	}
 	
 }

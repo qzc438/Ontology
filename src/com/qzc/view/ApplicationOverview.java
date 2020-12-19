@@ -20,6 +20,7 @@ public class ApplicationOverview implements Serializable {
 	
 	private String accelerometerName;
 	private String gyroscopeName;
+	private String medicalImagingDeviceName;
 	
 	private String model;
 	private String modelName;
@@ -42,9 +43,10 @@ public class ApplicationOverview implements Serializable {
 
 	public ApplicationOverview(String application, String applicationName, String healthcareApplicationName,
 			String skinCancerName, String musculoskeletalDisorderName, String data, String dataName, String dataFeature,
-			String dataDescription, String dataResource, String accelerometerName, String gyroscopeName, String model,
-			String modelName, String modelDescription, String modelResource, String cNNTypeName, String rNNTypeName,
-			String modelPerformance, String performanceAccuracy, String performancePrecision, String performanceRecall,
+			String dataDescription, String dataResource, String accelerometerName, String gyroscopeName,
+			String medicalImagingDeviceName, String model, String modelName, String modelDescription,
+			String modelResource, String cNNTypeName, String rNNTypeName, String modelPerformance,
+			String performanceAccuracy, String performancePrecision, String performanceRecall,
 			String performanceF1Score) {
 		super();
 		this.application = application;
@@ -59,6 +61,7 @@ public class ApplicationOverview implements Serializable {
 		this.dataResource = dataResource;
 		this.accelerometerName = accelerometerName;
 		this.gyroscopeName = gyroscopeName;
+		this.medicalImagingDeviceName = medicalImagingDeviceName;
 		this.model = model;
 		this.modelName = modelName;
 		this.modelDescription = modelDescription;
@@ -168,6 +171,14 @@ public class ApplicationOverview implements Serializable {
 		this.gyroscopeName = gyroscopeName;
 	}
 
+	public String getMedicalImagingDeviceName() {
+		return medicalImagingDeviceName;
+	}
+
+	public void setMedicalImagingDeviceName(String medicalImagingDeviceName) {
+		this.medicalImagingDeviceName = medicalImagingDeviceName;
+	}
+
 	public String getModel() {
 		return model;
 	}
@@ -263,11 +274,12 @@ public class ApplicationOverview implements Serializable {
 				+ ", musculoskeletalDisorderName=" + musculoskeletalDisorderName + ", data=" + data + ", dataName="
 				+ dataName + ", dataFeature=" + dataFeature + ", dataDescription=" + dataDescription + ", dataResource="
 				+ dataResource + ", accelerometerName=" + accelerometerName + ", gyroscopeName=" + gyroscopeName
-				+ ", model=" + model + ", modelName=" + modelName + ", modelDescription=" + modelDescription
-				+ ", modelResource=" + modelResource + ", CNNTypeName=" + CNNTypeName + ", RNNTypeName=" + RNNTypeName
-				+ ", modelPerformance=" + modelPerformance + ", performanceAccuracy=" + performanceAccuracy
-				+ ", performancePrecision=" + performancePrecision + ", performanceRecall=" + performanceRecall
-				+ ", performanceF1Score=" + performanceF1Score + "]";
+				+ ", medicalImagingDeviceName=" + medicalImagingDeviceName + ", model=" + model + ", modelName="
+				+ modelName + ", modelDescription=" + modelDescription + ", modelResource=" + modelResource
+				+ ", CNNTypeName=" + CNNTypeName + ", RNNTypeName=" + RNNTypeName + ", modelPerformance="
+				+ modelPerformance + ", performanceAccuracy=" + performanceAccuracy + ", performancePrecision="
+				+ performancePrecision + ", performanceRecall=" + performanceRecall + ", performanceF1Score="
+				+ performanceF1Score + "]";
 	}
 	
 }

@@ -55,7 +55,7 @@
 						<div class="modelformat flex multi-line">
 							<div class="item-line">
 								<h5>Application Domain</h5>
-								<h:selectOneMenu stype = "width:250px;" class="menuSelectLong" value="#{filters.applicationDomains}">
+								<h:selectOneMenu class="menuSelectLong" value="#{filters.applicationDomains}">
 									<f:selectItem itemValue="#{null}" itemLabel="-- Select --" noSelectionOption="true"/>
 									<f:selectItems value="#{indexController.applicationDomainList}" var="ad" itemLabel="#{ad.applicationDomainName}" itemValue="#{ad.applicationDomainName}"/>
 								</h:selectOneMenu>
@@ -114,11 +114,11 @@
 									<f:selectItem itemValue="#{null}" itemLabel="-- Select --" noSelectionOption="true"/>
 									<f:selectItems value="#{indexController.modelTypeList}" var="m" itemLabel="#{m.modelTypeName}" itemValue="#{m.modelTypeName}"/>
 								</h:selectOneMenu>
-								<h5 class="flex a-center" style="width: 232px;">Data Source Type</h5>
-								<h:selectOneMenu class="menuSelect" value="#{filters.sensoryTypes}">
+								<h5 class="flex a-center" style="width: 162px;">Data Source Type</h5>
+								<h:selectOneMenu class="menuSelectLong" value="#{filters.sensoryTypes}">
 									<f:selectItem itemValue="#{null}" itemLabel="-- Select --" noSelectionOption="true"/>
 									<f:selectItems value="#{indexController.sensoryTypeList}" var="d" itemLabel="#{d.sensoryTypeName}" itemValue="#{d.sensoryTypeName}"/>
-									<f:selectItem itemValue="MedicalImagingDevice" itemLabel="MedicalImagingDevice"/>
+									<!--<f:selectItem itemValue="MedicalImagingDevice" itemLabel="MedicalImagingDevice"/>-->
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -182,7 +182,7 @@
 						</div>
 						<div class="spanLine flex">
 							<!--<span>Sensor Type: <b>#{as.accelerometerName}</b>&nbsp;<b>#{as.gyroscopeName}</b></span>-->
-							<span>Data Source Type: <b>#{as.accelerometerName}</b>,&nbsp;<b>#{as.gyroscopeName}</b></span>
+							<span>Data Source Type: <b>#{as.accelerometerName}</b>&nbsp;<b>#{as.gyroscopeName}</b>&nbsp;<b>#{as.medicalImagingDeviceName}</b></span>
 						</div>
 						<!--  
 						<div class="spanLine flex">

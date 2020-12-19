@@ -71,7 +71,7 @@ public class OntologyManagedBean implements Serializable {
 		// List<ModelStructure> sortli = ontologyManagedBean.sortModelStructure(li);
 		// System.out.println(sortli);
 		// System.out.println(ontologyManagedBean.findApplicationSummaryByApplicationID("application-b456597c22c74f689c945a00592a7ac8"));
-		System.out.println(ontologyManagedBean.searchApplicationSummariesUseSameData("data-541e2f1a25fd46339a8b5ae094cde79b", "application-b456597c22c74f689c945a00592a7ac8"));
+		// System.out.println(ontologyManagedBean.searchApplicationSummariesUseSameData("data-541e2f1a25fd46339a8b5ae094cde79b", "application-b456597c22c74f689c945a00592a7ac8"));
 		// System.out.println(ontologyManagedBean.searchLayerDescripitionByLayerID("modelLayer1-a300d7036fb047d38331ddf8cf7aced4"));
 	}
 
@@ -127,13 +127,13 @@ public class OntologyManagedBean implements Serializable {
 	}
 	
 
-	// find all sensory types
+	// find all data source types
 	public List<SensoryType> findAllSensoryTypes() {
 		// sparql
-		String sparql = "SELECT ?sensoryType WHERE {?sensoryType rdfs:subClassOf onto:SensoryType.}";
+		String sparql = "SELECT ?dataSourceType WHERE {?dataSourceType rdfs:subClassOf onto:DataSourceType.}";
 		// test
 		String jsonString = findJsonResult(sparql);
-		System.out.println("findAllSensoryTypes:" + jsonString);
+		System.out.println("findAllDataSourceTypes:" + jsonString);
 		// result
 		JSONObject json;
 		try {
@@ -143,8 +143,8 @@ public class OntologyManagedBean implements Serializable {
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 				SensoryType sensoryType = new SensoryType();
-				if (jsonObject.has("sensoryType")) {
-					sensoryType.setSensoryTypeName(jsonObject.getJSONObject("sensoryType").getString("value").split("#")[1]);
+				if (jsonObject.has("dataSourceType")) {
+					sensoryType.setSensoryTypeName(jsonObject.getJSONObject("dataSourceType").getString("value").split("#")[1]);
 				}
 				list.add(sensoryType);
 			}
@@ -317,7 +317,7 @@ public class OntologyManagedBean implements Serializable {
 		
 		String sparql = "SELECT Distinct ?application ?applicationName ?healthcareApplication ?healthcareApplicationName \r\n"
 				+ "?skinCancerName ?musculoskeletalDisorderName \r\n"
-				+ "?data ?dataName ?dataFeature ?dataDescription ?dataResource ?accelerometerName ?gyroscopeName \r\n"
+				+ "?data ?dataName ?dataFeature ?dataDescription ?dataResource ?accelerometerName ?gyroscopeName ?medicalImagingDeviceName\r\n"
 				+ "(COUNT(Distinct ?model) as ?modelNumber)\r\n"
 				+ "(COUNT(Distinct ?modelLayer)/COUNT(Distinct ?model) as ?numberOfLayers)\r\n"
 				+ "(MAX(?performanceAccuracy) as ?maxAccuracy) (MAX(?performancePrecision) as ?maxPrecision) (MAX(?performanceRecall) as ?maxRecall) (MAX(?performanceF1Score) as ?maxF1Score)\r\n"
@@ -335,9 +335,10 @@ public class OntologyManagedBean implements Serializable {
 				+ "		?data onto:dataFeature ?dataFeature.\r\n"
 				+ "  	?data onto:dataDescription ?dataDescription.\r\n"
 				+ "  	?data onto:dataResource ?dataResource.\r\n"
-				+ "     ?data onto:hasSensoryType ?sensoryType.\r\n"
-				+ "     OPTIONAL{?sensoryType onto:hasAccelerometer ?accelerometer. ?accelerometer onto:accelerometerName ?accelerometerName.}\r\n"
-				+ "     OPTIONAL{?sensoryType onto:hasGyroscope ?gyroscope. ?gyroscope onto:gyroscopeName ?gyroscopeName.}\r\n"
+				+ "     ?data onto:hasDataSourceType ?dataSourceType.\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasAccelerometer ?accelerometer. ?accelerometer onto:accelerometerName ?accelerometerName.}\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasGyroscope ?gyroscope. ?gyroscope onto:gyroscopeName ?gyroscopeName.}\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasMedicalImagingDevice ?medicalImagingDevice. ?medicalImagingDevice onto:medicalImagingDeviceName ?medicalImagingDeviceName.}\r\n"
 				+ "	    ?application onto:hasModel ?model.\r\n" 
 				+ "  	?model onto:modelName ?modelName.\r\n"
 				+ "  	?model onto:modelDescription ?modelDescription.\r\n"
@@ -403,6 +404,9 @@ public class OntologyManagedBean implements Serializable {
 				}
 				if (sensoryTypes.equals("Gyroscope")) {
 					sparql += "FILTER (?gyroscopeName != \"\")\r\n";
+				}
+				if (sensoryTypes.equals("MedicalImagingDevice")) {
+					sparql += "FILTER (?medicalImagingDeviceName != \"\")\r\n";
 				}
 			}
 			// filter model type
@@ -569,7 +573,7 @@ public class OntologyManagedBean implements Serializable {
 		sparql += "}";
 		sparql += "GROUP BY\r\n";
 		sparql += "?application ?applicationName ?healthcareApplication ?healthcareApplicationName\r\n";
-		sparql += "?data ?dataName ?dataFeature ?dataDescription ?dataResource ?accelerometerName ?gyroscopeName\r\n";
+		sparql += "?data ?dataName ?dataFeature ?dataDescription ?dataResource ?accelerometerName ?gyroscopeName ?medicalImagingDeviceName\r\n";
 		sparql += "?skinCancerName ?musculoskeletalDisorderName\r\n";
 		
 		if(filters != null && filters.getNumberOfLayers()!=null) {
@@ -719,6 +723,9 @@ public class OntologyManagedBean implements Serializable {
 				if (jsonObject.has("gyroscopeName")) {
 					applicationSummary.setGyroscopeName(jsonObject.getJSONObject("gyroscopeName").getString("value"));
 				}
+				if (jsonObject.has("medicalImagingDeviceName")) {
+					applicationSummary.setMedicalImagingDeviceName(jsonObject.getJSONObject("medicalImagingDeviceName").getString("value"));
+				}
 				if (jsonObject.has("modelNumber")) {
 					applicationSummary.setModelNumber(Integer.parseInt(jsonObject.getJSONObject("modelNumber").getString("value")));
 				}
@@ -863,7 +870,7 @@ public class OntologyManagedBean implements Serializable {
 		// sparql
 		String sparql = "SELECT Distinct ?application ?applicationName ?healthcareApplication ?healthcareApplicationName \r\n"
 				+ "?skinCancerName ?musculoskeletalDisorderName \r\n"
-				+ "?data ?dataName ?dataFeature ?dataDescription ?dataResource ?accelerometerName ?gyroscopeName \r\n"
+				+ "?data ?dataName ?dataFeature ?dataDescription ?dataResource ?accelerometerName ?gyroscopeName ?medicalImagingDeviceName\r\n"
 				+ "?model ?modelName ?modelDescription ?modelResource ?CNNTypeName ?RNNTypeName\r\n"
 				+ "?modelPerformance ?performanceAccuracy ?performancePrecision ?performanceRecall ?performanceF1Score\r\n"
 				+ "WHERE {\r\n" + "	?application rdf:type onto:DeepLearningApplication.\r\n"
@@ -882,12 +889,17 @@ public class OntologyManagedBean implements Serializable {
 				+ "		?data onto:dataFeature ?dataFeature.\r\n"
 				+ "  	?data onto:dataDescription ?dataDescription.\r\n"
 				+ "  	?data onto:dataResource ?dataResource.\r\n"
-				+ "     ?data onto:hasSensoryType ?sensoryType.\r\n"
-				+ "     OPTIONAL{?sensoryType onto:hasAccelerometer ?accelerometer.\r\n"
+				+ "     ?data onto:hasDataSourceType ?dataSourceType.\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasAccelerometer ?accelerometer.\r\n"
 				+ "     	?accelerometer onto:accelerometerName ?accelerometerName.}\r\n"
-				+ "     OPTIONAL{?sensoryType onto:hasGyroscope ?gyroscope.\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasGyroscope ?gyroscope.\r\n"
 				+ "     	?gyroscope onto:gyroscopeName ?gyroscopeName.}\r\n"
-				+ "	    ?application onto:hasModel ?model.\r\n" + "  	?model onto:modelName ?modelName.\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasGyroscope ?gyroscope.\r\n"
+				+ "     	?gyroscope onto:gyroscopeName ?gyroscopeName.}\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasMedicalImagingDevice ?medicalImagingDevice.\r\n"
+				+ "     	?medicalImagingDevice onto:medicalImagingDeviceName ?medicalImagingDeviceName.}\r\n"
+				+ "	    ?application onto:hasModel ?model.\r\n" 
+				+ "  	?model onto:modelName ?modelName.\r\n"
 				+ "  	?model onto:modelDescription ?modelDescription.\r\n"
 				+ "  	?model onto:modelResource ?modelResource.\r\n"
 				+ "     OPTIONAL{?model onto:hasPerformance ?modelPerformance.}\r\n"
@@ -962,6 +974,9 @@ public class OntologyManagedBean implements Serializable {
 				if (jsonObject.has("gyroscopeName")) {
 					applicationOverview.setGyroscopeName(jsonObject.getJSONObject("gyroscopeName").getString("value"));
 				}
+				if (jsonObject.has("medicalImagingDeviceName")) {
+					applicationOverview.setMedicalImagingDeviceName(jsonObject.getJSONObject("medicalImagingDeviceName").getString("value"));
+				}
 				if (jsonObject.has("model")) {
 					applicationOverview.setModel(jsonObject.getJSONObject("model").getString("value").split("#")[1]);
 				}
@@ -1029,11 +1044,13 @@ public class OntologyManagedBean implements Serializable {
 				+ "		?data onto:dataFeature ?dataFeature.\r\n"
 				+ "  	?data onto:dataDescription ?dataDescription.\r\n"
 				+ "  	?data onto:dataResource ?dataResource.\r\n"
-				+ "     ?data onto:hasSensoryType ?sensoryType.\r\n"
-				+ "     OPTIONAL{?sensoryType onto:hasAccelerometer ?accelerometer.\r\n"
+				+ "     ?data onto:hasDataSourceType ?dataSourceType.\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasAccelerometer ?accelerometer.\r\n"
 				+ "     	?accelerometer onto:accelerometerName ?accelerometerName.}\r\n"
-				+ "     OPTIONAL{?sensoryType onto:hasGyroscope ?gyroscope.\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasGyroscope ?gyroscope.\r\n"
 				+ "     	?gyroscope onto:gyroscopeName ?gyroscopeName.}\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasMedicalImagingDevice ?medicalImagingDevice.\r\n"
+				+ "     	?medicalImagingDevice onto:medicalImagingDeviceName ?medicalImagingDeviceName.}\r\n"
 				+ "	    ?application onto:hasModel ?model.\r\n" 
 				+ "  	?model onto:modelName ?modelName.\r\n"
 				+ "  	?model onto:modelDescription ?modelDescription.\r\n"
@@ -1105,6 +1122,9 @@ public class OntologyManagedBean implements Serializable {
 				if (jsonObject.has("gyroscopeName")) {
 					applicationOverview.setGyroscopeName(jsonObject.getJSONObject("gyroscopeName").getString("value"));
 				}
+				if (jsonObject.has("medicalImagingDeviceName")) {
+					applicationOverview.setMedicalImagingDeviceName(jsonObject.getJSONObject("medicalImagingDeviceName").getString("value"));
+				}
 				if (jsonObject.has("model")) {
 					applicationOverview.setModel(jsonObject.getJSONObject("model").getString("value").split("#")[1]);
 				}
@@ -1173,11 +1193,13 @@ public class OntologyManagedBean implements Serializable {
 				+ "		?data onto:dataFeature ?dataFeature.\r\n"
 				+ "  	?data onto:dataDescription ?dataDescription.\r\n"
 				+ "  	?data onto:dataResource ?dataResource.\r\n"
-				+ "     ?data onto:hasSensoryType ?sensoryType.\r\n"
-				+ "     OPTIONAL{?sensoryType onto:hasAccelerometer ?accelerometer.\r\n"
+				+ "     ?data onto:hasDataSourceType ?dataSourceType.\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasAccelerometer ?accelerometer.\r\n"
 				+ "     	?accelerometer onto:accelerometerName ?accelerometerName.}\r\n"
-				+ "     OPTIONAL{?sensoryType onto:hasGyroscope ?gyroscope.\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasGyroscope ?gyroscope.\r\n"
 				+ "     	?gyroscope onto:gyroscopeName ?gyroscopeName.}\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasMedicalImagingDevice ?medicalImagingDevice.\r\n"
+				+ "     	?medicalImagingDevice onto:medicalImagingDeviceName ?medicalImagingDeviceName.}\r\n"
 				+ "	    ?application onto:hasModel ?model.\r\n" + "  	?model onto:modelName ?modelName.\r\n"
 				+ "  	?model onto:modelDescription ?modelDescription.\r\n"
 				+ "  	?model onto:modelResource ?modelResource.\r\n"
@@ -1245,6 +1267,9 @@ public class OntologyManagedBean implements Serializable {
 				}
 				if (jsonObject.has("gyroscopeName")) {
 					applicationOverview.setGyroscopeName(jsonObject.getJSONObject("gyroscopeName").getString("value"));
+				}
+				if (jsonObject.has("medicalImagingDeviceName")) {
+					applicationOverview.setMedicalImagingDeviceName(jsonObject.getJSONObject("medicalImagingDeviceName").getString("value"));
 				}
 				if (jsonObject.has("model")) {
 					applicationOverview.setModel(jsonObject.getJSONObject("model").getString("value").split("#")[1]);
@@ -1318,11 +1343,13 @@ public class OntologyManagedBean implements Serializable {
 				+ "		?data onto:dataFeature ?dataFeature.\r\n"
 				+ "  	?data onto:dataDescription ?dataDescription.\r\n"
 				+ "  	?data onto:dataResource ?dataResource.\r\n"
-				+ "     ?data onto:hasSensoryType ?sensoryType.\r\n"
-				+ "     OPTIONAL{?sensoryType onto:hasAccelerometer ?accelerometer.\r\n"
+				+ "     ?data onto:hasDataSourceType ?dataSourceType.\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasAccelerometer ?accelerometer.\r\n"
 				+ "     	?accelerometer onto:accelerometerName ?accelerometerName.}\r\n"
-				+ "     OPTIONAL{?sensoryType onto:hasGyroscope ?gyroscope.\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasGyroscope ?gyroscope.\r\n"
 				+ "     	?gyroscope onto:gyroscopeName ?gyroscopeName.}\r\n"
+				+ "     OPTIONAL{?dataSourceType onto:hasMedicalImagingDevice ?medicalImagingDevice.\r\n"
+				+ "     	?medicalImagingDevice onto:medicalImagingDeviceName ?medicalImagingDeviceName.}\r\n"
 				+ "	    ?application onto:hasModel ?model.\r\n" 
 				+ "  	?model onto:modelName ?modelName.\r\n"
 				+ "  	?model onto:modelDescription ?modelDescription.\r\n"
@@ -1395,6 +1422,9 @@ public class OntologyManagedBean implements Serializable {
 						}
 						if (jsonObject.has("gyroscopeName")) {
 							applicationSummary.setGyroscopeName(jsonObject.getJSONObject("gyroscopeName").getString("value"));
+						}
+						if (jsonObject.has("medicalImagingDeviceName")) {
+							applicationSummary.setMedicalImagingDeviceName(jsonObject.getJSONObject("medicalImagingDeviceName").getString("value"));
 						}
 						if (jsonObject.has("modelNumber")) {
 							applicationSummary.setModelNumber(Integer.parseInt(jsonObject.getJSONObject("modelNumber").getString("value")));

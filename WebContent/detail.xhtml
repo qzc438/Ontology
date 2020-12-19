@@ -18,7 +18,7 @@
 
 <h:body>
 	<div class="headBack flex a-center">
-		<a href="index.xhtml" class="flex a-center">
+		<a href="index.xhtml" class="button-clear flex a-center">
 			<div class="iconBack"></div> Back
 		</a>
 	</div>
@@ -39,7 +39,7 @@
 					<span>Data Feature: <b>#{detailController.applicationOverview.dataFeature}</b></span>
 				</div>
 				<div class="spanLine flex">
-					<span>Sensor Type: <b>#{detailController.applicationOverview.accelerometerName}</b>&nbsp;<b>#{detailController.applicationOverview.gyroscopeName}</b></span>
+					<span>Data Source Type: <b>#{detailController.applicationOverview.accelerometerName}</b>&nbsp;<b>#{detailController.applicationOverview.gyroscopeName}</b>&nbsp;<b>#{detailController.applicationOverview.medicalImagingDeviceName}</b></span>
 				</div>
 				<!--  
 				<div class="spanLine flex">
@@ -57,7 +57,7 @@
 				<span>Data Set Name: <b>#{detailController.applicationOverview.dataName}</b></span>
 			</div>
 			<div class="spanLine flex">
-				<span>Sensor Type: <b>#{detailController.applicationOverview.accelerometerName}</b>&nbsp;<b>#{detailController.applicationOverview.gyroscopeName}</b></span>
+				<span>Data Source Type: <b>#{detailController.applicationOverview.accelerometerName}</b>&nbsp;<b>#{detailController.applicationOverview.gyroscopeName}</b>&nbsp;<b>#{detailController.applicationOverview.medicalImagingDeviceName}</b></span>
 			</div>
 			<div class="spanLine flex">
 				<span>Data Description: <b>#{detailController.applicationOverview.dataDescription}</b></span>
@@ -182,9 +182,9 @@
 			</div>
 		</div>
 		
-			<div class="containedModels">
+		<div class="containedModels">
 			<h2>
-				Related Models<em></em>
+				<!--Related Models<em></em>-->
 			</h2>
 			<div class="flex wrap jlr">
 				<ui:repeat var="sds"
@@ -205,7 +205,7 @@
 							<span>Data Feature: <b>#{sds.dataFeature}</b></span>
 						</div>
 						<div class="spanLine flex">
-							<span>Sensor Type: <b>#{sds.accelerometerName}</b>&nbsp;<b>#{sds.gyroscopeName}</b></span>
+							<span>Data Source Type: <b>#{sds.accelerometerName}</b>&nbsp;<b>#{sds.gyroscopeName}</b>&nbsp;<b>#{sds.medicalImagingDeviceName}</b></span>
 						</div>
 						<!--  
 						<div class="spanLine flex">
@@ -298,8 +298,8 @@
 					</div>
 				</ui:repeat>
 			</div>
-		</div>
 		
+		</div>	
 	</div>
 </h:body>
 </html>

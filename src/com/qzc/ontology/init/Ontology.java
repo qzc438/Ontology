@@ -131,39 +131,52 @@ public class Ontology {
 		OWLDatatypeProperty dataResourceProperty = owlModel.createOWLDatatypeProperty(Naming.DATA_PROPERTY_DATA_RESOURCE);
 		dataResourceProperty.setRange(owlModel.getXSDstring());
 		dataResourceProperty.setDomain(dataClass);
-		// has sensory type
-		OWLNamedClass sensoryTypeClass = owlModel.createOWLNamedSubclass(Naming.CLASS_SENSORY_TYPE,dataClass);
-		OWLObjectProperty hasSensoryTypeProperty = owlModel.createOWLObjectProperty(Naming.OBJECT_PROPERTY_HAS_SENSORY_TYPE);
-		hasSensoryTypeProperty.setDomain(dataClass);
-		hasSensoryTypeProperty.setRange(sensoryTypeClass);
-		OWLObjectProperty isSensoryTypeOfProperty = owlModel.createOWLObjectProperty(Naming.OBJECT_PROPERTY_IS_SENSORY_TYPE_OF);
-		isSensoryTypeOfProperty.setDomain(sensoryTypeClass);
-		isSensoryTypeOfProperty.setRange(dataClass);
-		hasSensoryTypeProperty.setInverseProperty(isSensoryTypeOfProperty);
+		// has data source type
+		OWLNamedClass dataSourceTypeClass = owlModel.createOWLNamedSubclass(Naming.CLASS_DATA_SOURCE_TYPE,dataClass);
+		OWLObjectProperty hasDataSourceTypeProperty = owlModel.createOWLObjectProperty(Naming.OBJECT_PROPERTY_HAS_DATA_SOURCE_TYPE);
+		hasDataSourceTypeProperty.setDomain(dataClass);
+		hasDataSourceTypeProperty.setRange(dataSourceTypeClass);
+		OWLObjectProperty isDataSourceTypeOfProperty = owlModel.createOWLObjectProperty(Naming.OBJECT_PROPERTY_IS_DATA_SOURCE_TYPE_OF);
+		isDataSourceTypeOfProperty.setDomain(dataSourceTypeClass);
+		isDataSourceTypeOfProperty.setRange(dataClass);
+		hasDataSourceTypeProperty.setInverseProperty(isDataSourceTypeOfProperty);
 		// has accelerometer data
-		OWLNamedClass sensoryTypeAccelerometerClass = owlModel.createOWLNamedSubclass(Naming.CLASS_SENSORY_TYPE_ACCELEROMETER,sensoryTypeClass);
+		OWLNamedClass dataSourceTypeAccelerometerClass = owlModel.createOWLNamedSubclass(Naming.CLASS_DATA_SOURCE_TYPE_ACCELEROMETER,dataSourceTypeClass);
 		OWLDatatypeProperty accelerometerNameProperty = owlModel.createOWLDatatypeProperty(Naming.DATA_PROPERTY_ACCELEROMETER_NAME);
 		accelerometerNameProperty.setRange(owlModel.getXSDstring());
-		accelerometerNameProperty.setDomain(sensoryTypeAccelerometerClass);
+		accelerometerNameProperty.setDomain(dataSourceTypeAccelerometerClass);
 		OWLObjectProperty hasAccelerometerProperty = owlModel.createOWLObjectProperty(Naming.OBJECT_PROPERTY_HAS_ACCELEROMETER);
-		hasAccelerometerProperty.setDomain(sensoryTypeClass);
-		hasAccelerometerProperty.setRange(sensoryTypeAccelerometerClass);
+		hasAccelerometerProperty.setDomain(dataSourceTypeClass);
+		hasAccelerometerProperty.setRange(dataSourceTypeAccelerometerClass);
 		OWLObjectProperty isAccelerometerOfProperty = owlModel.createOWLObjectProperty(Naming.OBJECT_PROPERTY_IS_ACCELEROMETER_OF);
-		isAccelerometerOfProperty.setDomain(sensoryTypeAccelerometerClass);
-		isAccelerometerOfProperty.setRange(sensoryTypeClass);
+		isAccelerometerOfProperty.setDomain(dataSourceTypeAccelerometerClass);
+		isAccelerometerOfProperty.setRange(dataSourceTypeClass);
 		hasAccelerometerProperty.setInverseProperty(isAccelerometerOfProperty);
 		// has gyroscope data
-		OWLNamedClass sensoryTypeGyroscopeClass = owlModel.createOWLNamedSubclass(Naming.CLASS_DATA_TYPE_GYROSCOPE,sensoryTypeClass);
+		OWLNamedClass dataSourceTypeGyroscopeClass = owlModel.createOWLNamedSubclass(Naming.CLASS_DATA_SOURCE_TYPE_GYROSCOPE,dataSourceTypeClass);
 		OWLDatatypeProperty gyroscopeNameProperty = owlModel.createOWLDatatypeProperty(Naming.DATA_PROPERTY_GYROSCOPE_NAME);
 		gyroscopeNameProperty.setRange(owlModel.getXSDstring());
-		gyroscopeNameProperty.setDomain(sensoryTypeGyroscopeClass);
+		gyroscopeNameProperty.setDomain(dataSourceTypeGyroscopeClass);
 		OWLObjectProperty hasGyroscopeProperty = owlModel.createOWLObjectProperty(Naming.OBJECT_PROPERTY_HAS_GYROSCOPE);
-		hasGyroscopeProperty.setDomain(sensoryTypeClass);
-		hasGyroscopeProperty.setRange(sensoryTypeGyroscopeClass);
+		hasGyroscopeProperty.setDomain(dataSourceTypeClass);
+		hasGyroscopeProperty.setRange(dataSourceTypeGyroscopeClass);
 		OWLObjectProperty isGyroscopeOfProperty = owlModel.createOWLObjectProperty(Naming.OBJECT_PROPERTY_IS_GYROSCOPE_OF);
-		isGyroscopeOfProperty.setDomain(sensoryTypeGyroscopeClass);
-		isGyroscopeOfProperty.setRange(sensoryTypeClass);
+		isGyroscopeOfProperty.setDomain(dataSourceTypeGyroscopeClass);
+		isGyroscopeOfProperty.setRange(dataSourceTypeClass);
 		hasGyroscopeProperty.setInverseProperty(isGyroscopeOfProperty);
+		// has medical imaging device data
+		OWLNamedClass dataSourceTypeMedicalImagingDeviceClass = owlModel.createOWLNamedSubclass(Naming.CLASS_DATA_SOURCE_TYPE_MEDICALIMAGINGDEVICE,dataSourceTypeClass);
+		OWLDatatypeProperty medicalImagingDeviceNameProperty = owlModel.createOWLDatatypeProperty(Naming.DATA_PROPERTY_MEDICALIMAGINGDEVICE_NAME);
+		medicalImagingDeviceNameProperty.setRange(owlModel.getXSDstring());
+		medicalImagingDeviceNameProperty.setDomain(dataSourceTypeMedicalImagingDeviceClass);
+		OWLObjectProperty hasMedicalImagingProperty = owlModel.createOWLObjectProperty(Naming.OBJECT_PROPERTY_HAS_MEDICALIMAGINGDEVICE);
+		hasMedicalImagingProperty.setDomain(dataSourceTypeClass);
+		hasMedicalImagingProperty.setRange(dataSourceTypeMedicalImagingDeviceClass);
+		OWLObjectProperty isMedicalImagingDeviceOfProperty = owlModel.createOWLObjectProperty(Naming.OBJECT_PROPERTY_IS_MEDICALIMAGINGDEVICE_OF);
+		isMedicalImagingDeviceOfProperty.setDomain(dataSourceTypeMedicalImagingDeviceClass);
+		isMedicalImagingDeviceOfProperty.setRange(dataSourceTypeClass);
+		hasMedicalImagingProperty.setInverseProperty(isMedicalImagingDeviceOfProperty);
+		
 		
 		// model
 		OWLNamedClass modelClass = owlModel.createOWLNamedClass(Naming.CLASS_MODEL);
