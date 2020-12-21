@@ -5,4 +5,4 @@ The home-page is the landing page and provides the user with different options t
 ## DL Model Details Page
 If the user clicks the view button in the index page, it will redirect to DL model details page. For each model, the user can review information such as the feature set, sensor data type and other trained DL models for the same application that produced different accuracy results (this is due to the fact that DL models have mechanisms to assign weight and with each training run with same data, a new model with different accuracy may be generated).
 ![image](https://github.com/zqia0007/OROTUND/blob/master/WebContent/img/case2a-additional.png)
-<img src="https://github.com/zqia0007/OROTUND/blob/master/WebContent/img/case2a-additional.png" width="200" height="200" alt="微信小程序"/><br/>
+<img src="https://github.com/zqia0007/OROTUND/blob/master/WebContent/img/case2a-additional.png"/><br/>
