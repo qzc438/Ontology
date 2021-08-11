@@ -26,5 +26,5 @@ K. Sirinukunwattana, S. E. A. Raza, Y. Tsang, D. R. J. Snead, I. A. Cree, and N.
 <br/>
 D. Anguita, A. Ghio, L. Oneto, X. Parra, and J. L. Reyes-Ortiz, “A Public Domain Dataset for Human Activity Recognition using Smartphones,” in ESANN, 2013.
 
-## Thanks to my HD+ supervisors
+## Thanks to my HD+ master thesis supervisors
 #### Dr Pari Delir Haghighi, A/Prof Prem Prakash Jayaraman, Prof Frada Burstein, Yuxin Zhang and Dr Abdur Rahim Mohammad Forkan
